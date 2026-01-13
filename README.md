@@ -42,15 +42,21 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Ability to create custom goals with a custom measurment 
+- Ability to mark these goals as you complete them to show progress
+- Ability to keep a journal 
+- visible comments from friends and good emojis from strangers on public goals 
+- Goals organized in an asthetic way 
+- Dm friends to encourage success 
+- make goals with friends 
+- earn points as user interacts with the website (leaving hearts on public goals, writing to friends, completing / making goals, etc.)
+- spend points to get cool accessories on user avatar 
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
+- **HTML** - HTML will be used for authentication / login, 
 - **CSS** - Description here
 - **React** - Description here
 - **Service** - Description here
