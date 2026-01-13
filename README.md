@@ -19,7 +19,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
-- [] Description of key features
+- [x] Description of key features
 - [] Description of how you will use each technology
 - [] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
@@ -56,12 +56,12 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - HTML will be used for authentication / login, 
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - HTML will be used for the skeelton of the website, namely all the views elemts on each view such as login. 
+- **CSS** - This will make asthetic pages and customizable features on users' avatar
+- **React** - This will be used for when the user makes a goal and updates progress, also for when they write to their friends or in their journal, updates UI with live chats, notifications, tabview after login, 
+- **Service** - This will be used to retrieve statistics or previously completed goals or the goals of others in the public goals room. Also to recieve the avatars of each user and their public stats. 
+- **DB/Login** - This will be used to store the stats of a user such as their goals, friends, messages, liked posts, and anything else that shouyld presist between machines 
+- **WebSocket** - This will be used to allow users to get messages in real time and allow users to see updates in goal progress in real time. Also avatar changes and positive feedback on public goals. 
 
 ## 🚀 AWS deliverable
 
