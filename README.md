@@ -2,7 +2,7 @@ PMG for the homies
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Users will be able to create goals and organize them into customized categories. They can choose to make their goals public or prive, public goals can be seen by anyone and poeple can leave hearts and encouragement. Users can friend each other whitch will allow access to create goals together and allow users to read eachothers' progress journals (victories, discouragements, whatever the user writes). Measument of a goal brings improvement, with accountability and positive feedback, the rate of improvement accelerates. 
 
 > [!NOTE]
 > This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
