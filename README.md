@@ -1,4 +1,4 @@
-# Your startup name here
+PMG for the homies
 
 [My Notes](notes.md)
 
