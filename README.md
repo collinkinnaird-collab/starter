@@ -17,15 +17,15 @@ Users will be able to create goals and organize them into customized categories.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [] Description of key features
+- [] Description of how you will use each technology
+- [] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+A place where users can make measurable goals and collaborate on larger goals with friends. Users can recieve positive feedback on their progress from stangers if they choose to make thier goal public and they can recieve written feedback from friends on all of thier goals. As a user completes goals, interacts with others, or makes friends, they make points that they can then spend to buy cool accessories for their avatar. 
 
 ### Design
 
