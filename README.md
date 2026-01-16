@@ -66,7 +66,10 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+174.129.229.80 <- elastic dns (this one works)
+ssh -i ~/downloads/key.pem ubuntu@174.129.229.80 <- ssh shortcut
+
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://epicgoals.click).
 
 ## 🚀 HTML deliverable
 
