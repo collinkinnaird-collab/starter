@@ -76,15 +76,15 @@ ssh -i ~/downloads/key.pem ubuntu@174.129.229.80 <- ssh shortcut
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I have like 7 pages which is a ton, hopefully this doesn't bite my butt later
+- [x] **Proper HTML element usage** - I completed the proper style set up and inspired by the simon example
+- [x] **Links** - I navigate between several pages in a tab menu I plan to do
+- [x] **Text** - I write text to give little instruciton about how to make a goal, and future text will be given to display goals
+- [x] **3rd party API placeholder** - In my settings, I have a placeholder to display inspirational quotes 
+- [x] **Images** - I found a cool cog for settings, and I asked chat to make me some mock profile pics to get an idea of how I want it to look
+- [x] **Login placeholder** - I made a login placeholder on the index.html 
+- [x] **DB data placeholder** - I made a db placeholder with the tables I want to create (sort of)
+- [x] **WebSocket placeholder** - This is in the friends and media tab, to see how homie is doing with thier goals. 
 
 ## 🚀 CSS deliverable
 
