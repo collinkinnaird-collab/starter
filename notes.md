@@ -22,7 +22,7 @@ No problems worked just like it said in the [instruction](https://github.com/web
 
 ## HTML
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
+I suspect i will be coming back to this to add one or two things, stuff I didnt see coming, but we'll see, also, using <li> is great for stacking stuff. 
 
 The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
 
