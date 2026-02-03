@@ -1,0 +1,35 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  border-bottom: thin black solid;
+}
+
+section {
+  background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  border-left: solid 1em #eeeeee;  
+}
+
+/* h2 descendent of section */
+section h2 {
+  color: #0044EE;
+}
+
+/* Sibling of h2 */
+h2 ~ p {
+  padding-left: 0.5em;
+}
+
+
+/* paragraph with summary class */
+p.summary {
+  font-weight: bold;
+}
+
+/** on section mouse hover */
+section:hover {
+  border-left: solid 1em purple;
+}
