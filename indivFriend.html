@@ -15,50 +15,131 @@
             <nav>
 
                 <menu>
-                    <li><a href="friends.html">Friends</a></li>
-                </menu>
+                    <a class="btn btn-outline-info" href="friends.html">Back</a>
+                </menu>l
             </nav>
         </header>
-        <main>
-            <section>
-                <table>
-                    <tr>
-                        <th> Profile </th>
-                        <th> Goals </th>
-                        <th> Partnered goals </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <li>
-                            users name:
-                            </li>
-                            <li>
-                            <img src="../images/ChatGPT Image Jan 27, 2026 at 07_41_48 PM.png" alt="settings" width="50">
-                            </li>
-                        </td>
-                        <td>
-                            <ul>
-                                <li>Goal 1</li>
-                                <li>Goal 2</li>
-                                <li>Goal 3</li>
-                            </ul>
-                        </td>
-                         <td>
-                            <ul>
-                                <a href="goalMaker.html">add goal +</a>
-                                <li>Goal 1 </li>
-                                <li>Goal 2 </li>
-                                <li>Goal 3 </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+       <div class="container-fluid">
+            <div class="row">
+                <aside class="col-12 col-md-3 col-lg-2 border-end p-3 sticky-sidebar">
+                    <img src="../images/ChatGPT Image Jan 27, 2026 at 07_41_48 PM.png" alt="settings" width="200">
+                    <p class="small">User Name</p>
+                </aside>
+           
 
-                <p>Journal</p>
-            </section>
+        <main class="col-12 col-md-10 col-lg-10 p-3">
+            <div class="scroll-panel">
+                
+                <!-- intro row (should change dynamically with JS) -->
+                <div class="row g-3 mb-3">
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                         <p> Goal progress </p>
+                    </div></div>
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Goal</p>
+                    </div></div>
+                     <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Partner goal progress</p>
+                    </div></div>
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Partner goal</p>
+                        <a class="btn btn-outline-info" href="goalmaker.html">New Goal with this friend +</a>
+                    </div></div>
+                </div>
+
+                <!-- row 1 -->
+                <div class="row g-3 mb-3">
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                         <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text class="percentage" x="50%" y="50%" dy=".3em">90%</text>
+                             </svg>
+                         </div>
+                    </div></div>
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Goal: eat 1 fruit a day</p>
+                    </div></div>
+                     <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text class="percentage" x="50%" y="50%" dy=".3em">30%</text>
+                             </svg>
+                        </div>
+                    </div></div>
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Goal: read 3 books together</p>
+                    </div></div>
+                </div>
+                
+                <!-- row 2 -->
+                <div class="row g-3 mb-3">
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                         <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text class="percentage" x="50%" y="50%" dy=".3em">40%</text>
+                             </svg>
+                         </div>
+                    </div></div>
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Goal: read 1 chapter of Book of Mormon each day</p>
+                    </div></div>
+                     <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text class="percentage" x="50%" y="50%" dy=".3em">25%</text>
+                             </svg>
+                        </div>
+                    </div></div>
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Goal: go on one weekly run together</p>
+                    </div></div>
+                </div>
+
+                <!-- row 3 -->
+                <div class="row g-3 mb-3">
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                         <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text class="percentage" x="50%" y="50%" dy=".3em">99%</text>
+                             </svg>
+                         </div>
+                    </div></div>
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Goal: save $20 a day</p>
+                    </div></div>
+                     <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text class="percentage" x="50%" y="50%" dy=".3em">2%</text>
+                             </svg>
+                        </div>
+                    </div></div>
+                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                        <p>Goal: go swimming </p>
+                    </div></div>
+                </div>
+                <!-- <p>Journal: (still not sure how to implement this, maybe popup window, might need to make another html file, also bonus if time permits) </p> -->
+            </div>
 
         </main>
+        </div>
+    </div>
 
+
+        
+                            
 
         <footer>
             <hr />
