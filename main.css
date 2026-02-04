@@ -1,0 +1,16 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg,#141619 0%, #161d2a 100%);
+    color: rgba(255, 255, 255, 0.855);
+
+    -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  border-bottom: thin black solid;
+}
