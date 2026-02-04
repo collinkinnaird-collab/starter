@@ -44,7 +44,7 @@ ul.nav.nav-underline .nav-link[aria-current="page"] {
 
 .circular-chart .circle{
   fill: none;
-  stroke: #02ffe2;
+  stroke: #5DC7EC;
   stroke-width: 3.5;
   stroke-linecap: round;
   transform: rotate(-90deg);
@@ -66,4 +66,13 @@ ul.nav.nav-underline .nav-link[aria-current="page"] {
   box-sizing: border-box;
   background: rgba(126, 126, 126, 0.855);
   border-radius: 80px;
+}
+
+.card.custom {
+  background: rgba(27, 34, 50, 0.855);
+  border: 1px solid rgba(93, 199, 236, 0.568);
+  color: inherit;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
 }
