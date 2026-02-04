@@ -26,12 +26,16 @@
         </header>
         <main>
             <section>
-                <table>
+                <table class="dashboard-table">
+                    <thead>
                     <tr>
-                        <th> Profile </th>
-                        <th> Goals </th>
-                        <th> Goals with Friends </th>
+                        <th class="user-col"> You </th>
+                        <th class="progress-col"> Progress </th>
+                        <th class="goal-col"> Goals </th>
+                        <th class="friend-progress-col"> Progress with Friends </th>
+                        <th class="friend-goal-col"> Goals with friends</th>
                     </tr>
+                    </thead>
                     <tr>
                         <td>
                             <li>
@@ -44,7 +48,7 @@
                         <td>
                             <ul>
                                 <a href="goalMaker.html">add goal +</a>
-                                <li>Goal 1
+                                <li>
                                     <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                                         <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
                                             <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
@@ -52,9 +56,8 @@
                                             <text class="percentage" x="50%" y="50%" dy=".3em">90%</text>
                                         </svg>
                                     </div>
-                                    
                                 </li>
-                                <li>Goal 2
+                                <li>
                                     <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                                         <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
                                             <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
@@ -63,7 +66,7 @@
                                         </svg>
                                     </div>
                                 </li>
-                                <li>Goal 3
+                                <li>
                                     <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                                         <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
                                             <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
@@ -76,10 +79,42 @@
                         </td>
                         <td>
                             <ul>
+                                <li class="goal-text-sheet">gain 20 pounds by the end of the year</li>
+                                <li class="goal-text-sheet">Goal 2</li>
+                                <li class="goal-text-sheet">Goal 3</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
                                 <a href="goalMaker.html">add goal +</a>
-                                <li>Goal 1 with friend ...</li>
-                                <li>Goal 2 with friend ...</li>
-                                <li>Goal 3 with friend ...</li>
+                                <li>Goal 1 with friend ...
+                                    <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                                        <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                            <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                            <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                            <text class="percentage" x="50%" y="50%" dy=".3em">30%</text>
+                                        </svg>
+                                    </div>
+                                </li>
+                                
+                                <li>Goal 2 with friend ...
+                                    <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                                        <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                            <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                            <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                            <text class="percentage" x="50%" y="50%" dy=".3em">30%</text>
+                                        </svg>
+                                    </div>
+                                </li>
+                                <li>Goal 3 with friend ...
+                                    <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                                        <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
+                                            <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                            <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                            <text class="percentage" x="50%" y="50%" dy=".3em">30%</text>
+                                        </svg>
+                                    </div>
+                                </li>
                             </ul>
                         </td>
                     </tr>
