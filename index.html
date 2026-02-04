@@ -23,17 +23,17 @@
         <main>
 
             <h1> Lets Make Some goals!</h1>
-            <form method="get" action="home.html">
-                <div>
-                    <span>@</span>
-                    <input type ="text" placeholder="your@email.com" />
+            <form method="get" action="home.html" class="auth-form">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="123@email.com">
                 </div>
-                <div>
-                    <span>P</span>
-                    <input type="password" placeholder="password" />
-                </div>
-                <button type="submit">Login</button>
-                <button type="submit">Create</button>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="password">
+                </div class="btn-group">
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <button type="submit" class="btn btn-secondary">Sign Up</button>
                 <P>
                     TODO: Make a database to store user info!
                     Important info = 

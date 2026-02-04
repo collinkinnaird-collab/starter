@@ -14,3 +14,12 @@ body {
 h1 {
   border-bottom: thin black solid;
 }
+
+.auth-form{
+  max-width: 420px;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  background: rgba(126, 126, 126, 0.855);
+  border-radius: 8px;
+}
