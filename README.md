@@ -92,11 +92,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **Visually appealing colors and layout. No overflowing elements.** - I think it looks ok, but beauty is subjective
 - [x] **Use of a CSS framework** - I used bootstrap for nearly all my CSS
-- [x] **All visual elements styled using CSS** - I did not complete this part of the deliverable.
+- [x] **All visual elements styled using CSS** - All my files have some degree of CSS Styling and use main.css
 - [x] **Responsive to window resizing using flexbox and/or grid display** - It doesnt flex in the prettiest way, but it does flex
-- [ ] **Use of an imported font** - I did not complete this part of the deliverable.
-- [ ] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
-
+- [x] **Use of an imported font** - I use an imported font in all of my files (googleapi)
+- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I used this all, somewhat scattered but most can me found in my index.html.
 ## 🚀 React part 1: Routing deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
