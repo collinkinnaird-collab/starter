@@ -4,11 +4,18 @@ html, body {
 }
 
 body {
+    font-family: 'Inter', system-ui, -apple-system, "segoe UI", Robot, "Helvetica Neue", Arial;
     min-height: 100vh;
     background: linear-gradient(135deg,#141619 0%, #161d2a 100%);
     color: rgba(255, 255, 255, 0.855);
 
     -webkit-font-smoothing: antialiased;
+}
+
+#site-title{
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: rgba(0, 234, 255, 0.863)
 }
 
 h1 {
