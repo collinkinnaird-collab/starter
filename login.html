@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>goals HTML</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+        <link rel = "stylesheet" href="main.css">
+    </head>
+    <body>
+        <header>
+            <h1 id="site-title">Goals<sup>&reg;</sup></h1>
+            <nav>
+
+                <menu>
+                    <ul class="nav nav-underline justify-content-center">
+                        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
+                        <li class="nav-item"><a class="nav-link" href="friends.html">Friends</a></li>
+                        <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+                    </ul>
+                </menu>
+            </nav>
+        </header>
+        <main>
+
+            <h1> Lets Make Some goals!</h1>
+            <form method="get" action="home.html" class="auth-form">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="123@email.com">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="password">
+                </div class="btn-group">
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <button type="submit" class="btn btn-secondary">Sign Up</button>
+                <P>
+                    TODO: Make a database to store user info!
+                    Important info = 
+                    <ol>
+                        <li>
+                            name
+                        </li>
+                        <li>
+                            password
+                        </li>
+                        <li>
+                            friends
+                        </li>
+                        <li>
+                            goals
+                        </li>
+                        <li>
+                            journals
+                        </li>
+                        <li>
+                            likes (part of goals)
+                        </li>
+                        
+                    </ol>
+                </P>
+            </form>
+        </main>
+
+
+        <footer>
+            <hr />
+            <span class="text-reset">Collin Kinnaird</span>
+            <br />
+            <a href="https://github.com/collinkinnaird-collab/starter">GitHub</a>
+        </footer>
+    </body>
+</html>
