@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import { Friends } from './friends/friends';
 import { GoalMaker } from './goalMaker/goalMaker';
 import { Home } from './home/home';
@@ -31,6 +31,7 @@ export default function App() {
             </nav>
         </header>
           <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login />} exact />
             <Route path="/home" element={<Home />}  />
             <Route path="/media" element={<Media />} />
