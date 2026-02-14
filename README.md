@@ -100,9 +100,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - So vite works and it is a super good debugger!
+- [x] **Components** - I have made jsx files for all of my html files and my files are organized into the way that vite likes it. All my files still rely havily on the main.css or inline bootstrap, bit the css files for each jsx file have been created in case this changes. 
+- [x] **Router** - There are like 7 files the router touches, and some files import NavLink so that files can be access outside the header inside other files.
 
 ## 🚀 React part 2: Reactivity deliverable
 
