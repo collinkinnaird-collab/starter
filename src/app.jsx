@@ -3,11 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Friends } from './friends/friends';
-// import { GoalMaker } from './goalMaker/goalMaker';
+import { GoalMaker } from './goalMaker/goalMaker';
 import { Home } from './home/home';
 import { Media } from './media/media';
 import { Settings} from './settings/settings';
 import { Login } from './login/login';
+import { IndividualFriend } from './friends/indivFriend';
+
 
 export default function App() {
   return ( 
@@ -34,6 +36,8 @@ export default function App() {
             <Route path="/media" element={<Media />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/goalMaker" element={<GoalMaker />} />
+            <Route path="/friends/:id" element={<IndividualFriend />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
 
