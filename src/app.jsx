@@ -7,6 +7,7 @@ import { Friends } from './friends/friends';
 import { Home } from './home/home';
 import { Media } from './media/media';
 import { Settings} from './settings/settings';
+import { Login } from './login/login';
 
 export default function App() {
   return ( 
@@ -18,6 +19,7 @@ export default function App() {
 
                 <menu>
                     <ul className="nav nav-underline justify-content-center">
+                        <li className="nav-item"><NavLink className="nav-link" to="/login">Login</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" to="/home">Home</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" to="/media">Media</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" to="/friends">Friends</NavLink></li>
@@ -26,51 +28,9 @@ export default function App() {
                 </menu>
             </nav>
         </header>
-        <main>
-
-            <h1> Lets Make Some goals!</h1>
-            <form method="get" action="home.html" className="auth-form">
-                <div className="mb-3">
-                    <label for="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" placeholder="123@email.com"/>
-                </div>
-                <div className="mb-3">
-                    <label for="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" placeholder="password"/>
-                </div>
-                <div className="btn-group"/>
-                <button type="submit" className="btn btn-primary">Sign In</button>
-                <button type="submit" className="btn btn-secondary">Sign Up</button>
-                <p>
-                    TODO: Make a database to store user info!
-                    Important info = 
-                    <ol>
-                        <li>
-                            name
-                        </li>
-                        <li>
-                            password
-                        </li>
-                        <li>
-                            friends
-                        </li>
-                        <li>
-                            goals
-                        </li>
-                        <li>
-                            journals
-                        </li>
-                        <li>
-                            likes (part of goals)
-                        </li>
-                        
-                    </ol>
-                </p>
-            </form>
-        </main>
-
           <Routes>
-            <Route path="/home" element={<Home />} exact />
+            <Route path="/login" element={<Login />} exact />
+            <Route path="/home" element={<Home />}  />
             <Route path="/media" element={<Media />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/settings" element={<Settings />} />
