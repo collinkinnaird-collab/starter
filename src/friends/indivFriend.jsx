@@ -13,7 +13,7 @@ export function IndividualFriend() {
                  <div className="container-fluid"/>
             <div className="row">
                 <aside className="col-12 col-md-3 col-lg-2 border-end p-3 sticky-sidebar">
-                    <img src="../images/image_2.png" alt="settings" width="200"/>
+                    <img src="/images/image_2.png" alt="settings" width="200"/>
                     <p className="small">User Name</p>
                 </aside>
 

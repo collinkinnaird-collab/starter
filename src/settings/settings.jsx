@@ -4,7 +4,7 @@ export function Settings() {
   return (
      <main>
 
-            <img src="../images/settings-pic.jpg" alt="settings" width="50" />
+            <img src="/images/settings-pic.jpg" alt="settings" width="50" />
 
              <section>
                  <li>
