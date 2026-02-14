@@ -8,7 +8,7 @@ export function Settings() {
 
              <section>
                  <li>
-                    <label for="color">Color: </label>
+                    <label htmlFor="color">Color: </label>
                     <input type="color" name="varColor" id="color" />
                 </li>
                 <li>

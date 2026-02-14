@@ -7,57 +7,57 @@ export function Media() {
                 <div className="row g-3 mb-3">
                     <div className="col-6 col-lg-3"><div className="card p-3 custom">
                         <img src="../images/ChatGPT Image Jan 27, 2026 at 07_41_48_PM.png" alt="settings" width="50"/>
-                        <p class="small">GoalMaster27</p>
+                        <p className="small">GoalMaster27</p>
                     </div></div>
-                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
-                         <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
-                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text class="percentage" x="50%" y="50%" dy=".3em">90%</text>
+                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
+                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
+                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text className="percentage" x="50%" y="50%" dy=".3em">90%</text>
                              </svg>
                          </div>
                     </div></div>
-                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
                         <p>Goal: Gain 20 pounds by the end of the year</p>
                     </div></div>
                 </div>
-                
-                
-                <div class="row g-3 mb-3">
-                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+
+
+                <div className="row g-3 mb-3">
+                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
                        <img src="../images/ChatGPT Image Jan 27, 2026 at 07_41_48 PM.png" alt="settings" width="50"/>
-                        <p class="small">epicGirl</p>
+                        <p className="small">epicGirl</p>
                     </div></div>
-                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
-                         <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
-                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text class="percentage" x="50%" y="50%" dy=".3em">80%</text>
+                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
+                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
+                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text className="percentage" x="50%" y="50%" dy=".3em">80%</text>
                              </svg>
                          </div>
                     </div></div>
-                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
                         <p>Goal: eat 1 fruit a day</p>
                     </div></div>
                 </div>
 
-                <div class="row g-3 mb-3">
-                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
-                        <img src="../images/ChatGPT Image Jan 27, 2026 at 07_41_48 PM.png" alt="settings" width="50"/>
-                        <p class="small">User Name</p>
+                <div className="row g-3 mb-3">
+                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
+                        <img src="../images/ChatGPT Image Jan 27, 2026 at 07_41_48_PM.png" alt="settings" width="50"/>
+                        <p className="small">User Name</p>
                     </div></div>
-                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
-                         <div class="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true"> 
-                                        <path class="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path class="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text class="percentage" x="50%" y="50%" dy=".3em">70%</text>
+                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
+                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
+                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
+                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <text className="percentage" x="50%" y="50%" dy=".3em">70%</text>
                              </svg>
                          </div>
                     </div></div>
-                    <div class="col-6 col-lg-3"><div class="card p-3 custom">
+                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
                         <p>Goal: Gain 20 pounds by the end of the year</p>
                     </div></div>
                 </div>

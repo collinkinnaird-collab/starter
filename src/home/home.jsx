@@ -34,7 +34,7 @@ export function Home() {
                          <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                             <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
                                         <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
                                         <text className="percentage" x="50%" y="50%" dy=".3em">90%</text>
                              </svg>
                          </div>
@@ -46,7 +46,7 @@ export function Home() {
                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                             <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
                                         <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
                                         <text className="percentage" x="50%" y="50%" dy=".3em">30%</text>
                              </svg>
                         </div>
@@ -61,7 +61,7 @@ export function Home() {
                          <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                             <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
                                         <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
                                         <text className="percentage" x="50%" y="50%" dy=".3em">40%</text>
                              </svg>
                          </div>
@@ -73,7 +73,7 @@ export function Home() {
                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                             <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
                                         <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
                                         <text className="percentage" x="50%" y="50%" dy=".3em">25%</text>
                              </svg>
                         </div>
@@ -88,7 +88,7 @@ export function Home() {
                          <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                             <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
                                         <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
                                         <text className="percentage" x="50%" y="50%" dy=".3em">99%</text>
                              </svg>
                          </div>
@@ -100,7 +100,7 @@ export function Home() {
                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
                             <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
                                         <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" stroke-dasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
+                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
                                         <text className="percentage" x="50%" y="50%" dy=".3em">2%</text>
                              </svg>
                         </div>
