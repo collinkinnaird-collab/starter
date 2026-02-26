@@ -99,88 +99,25 @@ export function Home() {
                     </div></div>
                 </div>
 
-                <div className="row g-3 mb-3">
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
-                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text className="percentage" x="50%" y="50%" dy=".3em">90%</text>
-                             </svg>
-                         </div>
-                    </div></div>
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <p>Goal: Gain 20 pounds by the end of the year</p>
-                    </div></div>
-                     <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
-                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text className="percentage" x="50%" y="50%" dy=".3em">30%</text>
-                             </svg>
-                        </div>
-                    </div></div>
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <p>Goal: read 3 books together</p>
-                    </div></div>
+              {rows.map((row, index) => (
+                <div className="row g-3 mb-3" key={index}>
+                  {row.map((goal) => (
+                    <GoalCard key={goal.id} goal={goal} onDelete={deleteGoal} />
+                  ))}
                 </div>
+              ))}
 
-                <div className="row g-3 mb-3">
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
-                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text className="percentage" x="50%" y="50%" dy=".3em">40%</text>
-                             </svg>
-                         </div>
-                    </div></div>
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <p>Goal: study 30 min each day</p>
-                    </div></div>
-                     <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
-                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text className="percentage" x="50%" y="50%" dy=".3em">25%</text>
-                             </svg>
-                        </div>
-                    </div></div>
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <p>Goal: go on one weekly run together</p>
-                    </div></div>
+              {goals.length === 0 && (
+                <div className="card p-4 custom text-center">
+                    <p className="mb-2">No goals yet</p>
+                    <NavLink className="btn btn-outline-info" to="/goalMaker">New Goal +
+                    </NavLink>
                 </div>
-
-                <div className="row g-3 mb-3">
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                         <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
-                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text className="percentage" x="50%" y="50%" dy=".3em">99%</text>
-                             </svg>
-                         </div>
-                    </div></div>
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <p>Goal: one daily act of service </p>
-                    </div></div>
-                     <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <div className="progress-circle" role="progressbar" aria-label="Goal progress" aria-valuemin="0" aria-valuemax="100" data-percentage="65" aria-valuenow="65">
-                            <svg viewBox="0 0 36 36" className="circular-chart" aria-hidden="true"> 
-                                        <path className="circle-bg" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <path className="circle" strokeDasharray="0 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" />
-                                        <text className="percentage" x="50%" y="50%" dy=".3em">2%</text>
-                             </svg>
-                        </div>
-                    </div></div>
-                    <div className="col-6 col-lg-3"><div className="card p-3 custom">
-                        <p>Goal: go swimming </p>
-                    </div></div>
-                </div>
-                </div>
+              )}
+              </div>
             </section>
+        </div>
+        </div>
 
         </main>
   );
