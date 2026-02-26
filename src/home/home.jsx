@@ -58,14 +58,28 @@ function GoalCard({ goal, onDelete }) {
 
 
 export function Home() {
+
+  const deleteGoal = (id) => {
+    setGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
+  }  
+
+  const rows = useMemo(() => {
+    const copy = [...goals];
+    const out = [];
+    while (copy.length) out.push(copy.splice(0, 2));
+    return out;
+  }, [goals]);
+  
   return (
      <main className="col-12 col-md-10 col-lg-10 p-3">
-          <div className="container-fluid"/>
-            <div className="row"/>
+          <div className="container-fluid">
+            <div className="row">
                 <aside className="col-12 col-md-3 col-lg-2 border-end p-3 sticky-sidebar">
                     <img src="/images/image_1.png" className="img-fluid rounded-circle mb-3" alt="settings" width="250"/>
                     <p className="small">User Name</p>
                 </aside>
+
+            <section className="col-12 col-md-9 col-lg-10">
             <div className="scroll-panel">
 
                 <div className="row g-3 mb-3">
@@ -166,6 +180,7 @@ export function Home() {
                     </div></div>
                 </div>
                 </div>
+            </section>
 
         </main>
   );
