@@ -75,9 +75,8 @@ Setting up Vite and React was pretty simple. I am so excited to get reactivity g
 
 ## React Part 2: Reactivity
 
-This was a lot of fun to see it all come together. I had to keep remembering to use React state instead of just manipulating the DOM directly.
+So, in css file, make thinks to prevent background objects or other stuff not be dynamic if you want other things to be.
 
-Handling the toggling of the checkboxes was particularly interesting.
 
 ```jsx
 <div className="input-group sound-button-container">
