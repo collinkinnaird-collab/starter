@@ -10,6 +10,21 @@ html, body {
     margin: 0;
 }
 
+.scroll-panel {
+  max-height: 70vh;       
+  overflow-y: auto;
+  padding-right: 8px;    
+}
+
+.sticky-top-row {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(135deg,#141619 0%, #161d2a 100%);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap'); */
 
 body {

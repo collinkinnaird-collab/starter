@@ -59,6 +59,16 @@ function GoalCard({ goal, onDelete }) {
 
 export function Home() {
 
+const [goals, setGoals] = useState([
+    { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
+    { id: "g2", title: "Read 3 books together", progress: 30, isPartner: true },
+    { id: "g3", title: "Study 30 min each day", progress: 40, isPartner: false },
+    { id: "g4", title: "Go on one weekly run together", progress: 25, isPartner: true },
+    { id: "g5", title: "One daily act of service", progress: 99, isPartner: false },
+    { id: "g6", title: "Go swimming", progress: 2, isPartner: true },
+  ]);
+
+
   const deleteGoal = (id) => {
     setGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
   }  
@@ -81,7 +91,8 @@ export function Home() {
 
             <section className="col-12 col-md-9 col-lg-10">
             <div className="scroll-panel">
-
+               <div className="sticky-top-row">
+                <div className="px-2">
                 <div className="row g-3 mb-3">
                     <div className="col-6 col-lg-3"><div className="card p-3 custom">
                          <p> Goal progress </p>
@@ -97,6 +108,8 @@ export function Home() {
                         <p>Partner goal</p>
                         <NavLink className="btn btn-outline-info" to="/goalMaker">New PartnerGoal +</NavLink>
                     </div></div>
+                </div>
+                </div>
                 </div>
 
               {rows.map((row, index) => (
