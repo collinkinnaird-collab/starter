@@ -1,12 +1,14 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 
 
 export default function ProgressCircle({ 
     initialPercent = 0,
-    step = 5,
+    step = 1,
     max = 100
     }) {
         const [percent, setPercent] = useState(() => Number(initialPercent) || 0);
+
+        const intervalRef = useRef(null);
     
         const clampedPercent = useMemo(() => {
             const n = Number(percent) || 0;
@@ -14,17 +16,32 @@ export default function ProgressCircle({
         }, [percent, max]);
 
         function handleClick() {
-            setPercent((prev) => {
-                const next = (Number(prev) || 0) + (Number(step) || 0);
-                return next > max ? 0 : next;
-            });
+                setPercent((prev) => Math.min(max, prev + step));
+            }
+
+        function handleHoldStart() {
+            if (intervalRef.current !== null) return;
+
+            intervalRef.current = setInterval(() => {
+                setPercent((prev) => {
+                    const next = prev + step;
+                    return next > max ? max : next;
+                });
+            }, 50);
+        }
+
+        function handleHoldEnd() {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
         }
     return (
         <button
             type="button"
             className="progress-circle"
             onClick={handleClick}
-
+            onMouseDown={handleHoldStart}
+            onMouseUp={handleHoldEnd}
+            onMouseLeave={handleHoldEnd}
             role="progressbar"
             aria-label="Goal progress"
             aria-valuemin={0}
