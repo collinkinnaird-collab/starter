@@ -7,6 +7,7 @@ export function GoalMaker({ onAddGoal}) {
     const [goalType, setGoalType] = useState("physical");
     const [measurement, setMeasurement] = useState("count");
     const [title, setTitle] = useState("");
+    const [isPartner, setIsPartner] = useState(false);
 
     const navigate = useNavigate();
 
@@ -21,10 +22,11 @@ export function GoalMaker({ onAddGoal}) {
             goalType,
             measurement,
             progress: 0,
-            isPartner: false
+            isPartner,
         });
 
         setTitle("");
+        setIsPartner(false);
         navigate("/home");
     }
   return (
@@ -57,6 +59,20 @@ export function GoalMaker({ onAddGoal}) {
 
 
                   <section>
+
+                     <div className="form-check mt-3">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="isPartner"
+              checked={isPartner}
+              onChange={(e) => setIsPartner(e.target.checked)}
+            />
+            <label className="form-check-label" htmlFor="isPartner">
+              Partner goal
+            </label>
+          </div>
+          
                 <button 
                     className="btn btn-outline-light"
                     type="submit"

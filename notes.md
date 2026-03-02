@@ -77,23 +77,4 @@ Setting up Vite and React was pretty simple. I am so excited to get reactivity g
 
 So, in css file, make thinks to prevent background objects or other stuff not be dynamic if you want other things to be.
 
-
-```jsx
-<div className="input-group sound-button-container">
-  {calmSoundTypes.map((sound, index) => (
-    <div key={index} className="form-check form-switch">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        value={sound}
-        id={sound}
-        onChange={() => togglePlay(sound)}
-        checked={selectedSounds.includes(sound)}
-      ></input>
-      <label className="form-check-label" htmlFor={sound}>
-        {sound}
-      </label>
-    </div>
-  ))}
-</div>
-```
+ok, so [variable name, thing that manipulates it] => useState;
