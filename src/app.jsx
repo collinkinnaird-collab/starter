@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, Navigate, NavLink, Route, Routes } from 'react-router-dom';
@@ -12,6 +12,28 @@ import { IndividualFriend } from './friends/indivFriend';
 
 
 export default function App() {
+
+    const [goals, setGoals] = useState([
+    { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
+    { id: "g2", title: "Read 3 books together", progress: 30, isPartner: true },
+    { id: "g3", title: "Study 30 min each day", progress: 40, isPartner: false },
+    { id: "g4", title: "Go on one weekly run together", progress: 25, isPartner: true },
+    { id: "g5", title: "One daily act of service", progress: 99, isPartner: false },
+    { id: "g6", title: "Go swimming", progress: 2, isPartner: true },
+    ]);
+
+    function handleAddGoal(newGoal) {
+      const goalWithId = {
+        id: crypto.randomUUID(),
+        ...newGoal
+      };
+      setGoals((prev) => [goalWithId, ...prev]);
+    }
+
+    function deleteGoal(id) {
+        setGoals((prev) => prev.filter((goal) => goal.id !== id));
+    }
+
   return ( 
     <BrowserRouter>
   <div className="app bg-dark text-light">
@@ -33,11 +55,11 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login />} exact />
-            <Route path="/home" element={<Home />}  />
+            <Route path="/home" element={<Home goals={goals} onDeleteGoal={deleteGoal} />}  />
             <Route path="/media" element={<Media />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/goalMaker" element={<GoalMaker />} />
+            <Route path="/goalMaker" element={<GoalMaker onAddGoal={handleAddGoal} />} />
             <Route path="/friends/:id" element={<IndividualFriend />} />
             <Route path='*' element={<NotFound />} />
           </Routes>

@@ -1,7 +1,32 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-export function GoalMaker() {
+
+export function GoalMaker({ onAddGoal}) {
+
+    const [goalType, setGoalType] = useState("physical");
+    const [measurement, setMeasurement] = useState("count");
+    const [title, setTitle] = useState("");
+
+    const navigate = useNavigate();
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const trimmed = title.trim();
+        if(!trimmed) return;
+
+        onAddGoal({
+            title: trimmed,
+            goalType,
+            measurement,
+            progress: 0,
+            isPartner: false
+        });
+
+        setTitle("");
+        navigate("/home");
+    }
   return (
      <main>
             <section>
@@ -11,22 +36,36 @@ export function GoalMaker() {
                 <p> 
                     Try making a goal that will push you a little bit, make sure it is something measurable
                 </p>
-                <label for="select">Goal Type: </label>
-                <select id="select" name="varSelect">
-                    <option>Physical</option>
-                    <option selected>Spiritaul</option>
-                    <option>Intellectual</option>
-                    <option>Social</option>
-                    <option>Financial</option>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="goalType">Goal Type: </label>
+                    <select id="goalType" value={goalType} onChange={e => setGoalType(e.target.value)}>
+                        <option value="physical">Physical</option>
+                        <option value="spiritual">Spiritual</option>
+                        <option value="intellectual">Intellectual</option>
+                        <option value="social">Social</option>
+                        <option value="financial">Financial</option>
+                    </select>
 
+                <label htmlFor="measurement">Measurement: </label>
+                <select id="measurement" value={measurement} onChange={e => setMeasurement(e.target.value)}>
+                    <option value="count">count</option>
+                    <option value="time">time</option>
                 </select>
 
-                <label for="select">Measurement: </label>
-                <select id="select" name="varSelect">
-                    <option>count</option>
-                    <option selected>time</option>
+                <label htmlFor="goalTitle">Goal: </label>
+                <input type="text" id="goalTitle" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g., Study 30 min each day" />
 
-                </select>
+
+                  <section>
+                <button 
+                    className="btn btn-outline-light"
+                    type="submit"
+                >
+                Create Goal</button>
+            </section>
+                </form>
+
+
 
 
             </section>

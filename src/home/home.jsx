@@ -3,21 +3,7 @@ import { NavLink } from 'react-router-dom';
 import GoalCard from '../components/goalCard';
 
 
-export function Home() {
-
-    const [goals, setGoals] = useState([
-        { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
-        { id: "g2", title: "Read 3 books together", progress: 30, isPartner: true },
-        { id: "g3", title: "Study 30 min each day", progress: 40, isPartner: false },
-        { id: "g4", title: "Go on one weekly run together", progress: 25, isPartner: true },
-        { id: "g5", title: "One daily act of service", progress: 99, isPartner: false },
-        { id: "g6", title: "Go swimming", progress: 2, isPartner: true },
-    ]);
-
-
-    const deleteGoal = (id) => {
-        setGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
-    }
+export function Home({ goals, onDeleteGoal }) {
 
     const rows = useMemo(() => {
         const copy = [...goals];
@@ -55,7 +41,7 @@ export function Home() {
                                     </div>
                                     {personalGoals.map((goal) => (
                                         <div className="row g-3 mb-3" key={goal.id}>
-                                            <GoalCard goal={goal} onDelete={deleteGoal} />
+                                            <GoalCard goal={goal} onDelete={onDeleteGoal} />
                                         </div>
                                     ))}
 
@@ -85,7 +71,7 @@ export function Home() {
 
                                     {partnerGoals.map((goal) => (
                                         <div className="row g-3 mb-3" key={goal.id}>
-                                            <GoalCard goal={goal} onDelete={deleteGoal} />
+                                            <GoalCard goal={goal} onDelete={onDeleteGoal} />
                                         </div>
                                     ))}
 
