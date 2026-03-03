@@ -1,15 +1,20 @@
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useState, useRef, useEffect } from 'react';
 
 
 export default function ProgressCircle({ 
     initialPercent = 0,
+    onChange,
     step = 1,
     max = 100
     }) {
         const [percent, setPercent] = useState(() => Number(initialPercent) || 0);
 
         const intervalRef = useRef(null);
-    
+
+        useEffect(() => {
+            setPercent(Number(initialPercent) || 0);
+        }, [initialPercent]);
+
         const clampedPercent = useMemo(() => {
             const n = Number(percent) || 0;
             return Math.max(0, Math.min(max, n));
@@ -34,6 +39,13 @@ export default function ProgressCircle({
             clearInterval(intervalRef.current);
             intervalRef.current = null;
         }
+
+        useEffect(() => {
+            return () => {
+                if (intervalRef.current) clearInterval(intervalRef.current);
+            };
+        }, []);
+
     return (
         <button
             type="button"

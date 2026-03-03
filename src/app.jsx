@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, Navigate, NavLink, Route, Routes } from 'react-router-dom';
@@ -13,14 +13,35 @@ import { IndividualFriend } from './friends/indivFriend';
 
 export default function App() {
 
-    const [goals, setGoals] = useState([
-    { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
-    { id: "g2", title: "Read 3 books together", progress: 30, isPartner: true },
-    { id: "g3", title: "Study 30 min each day", progress: 40, isPartner: false },
-    { id: "g4", title: "Go on one weekly run together", progress: 25, isPartner: true },
-    { id: "g5", title: "One daily act of service", progress: 99, isPartner: false },
-    { id: "g6", title: "Go swimming", progress: 2, isPartner: true },
-    ]);
+    const DEFAULT_GOALS = [
+      { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
+      { id: "g2", title: "Read 3 books together", progress: 30, isPartner: true },
+      { id: "g3", title: "Study 30 min each day", progress: 40, isPartner: false },
+      { id: "g4", title: "Go on one weekly run together", progress: 25, isPartner: true },
+      { id: "g5", title: "One daily act of service", progress: 99, isPartner: false },
+      { id: "g6", title: "Go swimming", progress: 2, isPartner: true },
+    ]
+
+    const STORAGE_KEY = "goals.v1";
+
+    const [goals, setGoals] = useState(() => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return DEFAULT_GOALS;
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : DEFAULT_GOALS;
+      } catch {
+        return DEFAULT_GOALS;
+      }
+    });
+
+    useEffect(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(goals));
+      } catch {
+        console.error("Failed to save goals to localStorage");
+      }
+    }, [goals]);
 
     function handleAddGoal(newGoal) {
       const goalWithId = {
@@ -32,6 +53,10 @@ export default function App() {
 
     function deleteGoal(id) {
         setGoals((prev) => prev.filter((goal) => goal.id !== id));
+    }
+
+    function updateGoal(id, patch) {
+      setGoals((prev) => prev.map((goal) => goal.id === id ? { ...goal, ...patch } : goal));
     }
 
   return ( 
@@ -55,7 +80,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login />} exact />
-            <Route path="/home" element={<Home goals={goals} onDeleteGoal={deleteGoal} />}  />
+            <Route path="/home" element={<Home goals={goals} onDeleteGoal={deleteGoal} onUpdateGoal={updateGoal} />}  />
             <Route path="/media" element={<Media />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/settings" element={<Settings />} />

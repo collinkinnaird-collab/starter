@@ -1,12 +1,16 @@
 import React from 'react';
 import ProgressCircle from './progressCircle';
 
-export default function GoalCard({ goal, onDelete }) {
+export default function GoalCard({ goal, onDelete, onUpdateGoal}) {
     return (
         <>
             <div className="col-6">
                 <div className="card p-3 custom h-100 d-flex align-items-center justify-content-center">
-                    <ProgressCircle percent={goal.progress} />
+                    <ProgressCircle 
+                    initialPercent={goal.progress} 
+                    onChange={(newProgress) => onUpdateGoal(goal.id, { progress: newProgress })} 
+                    step={1}
+                    max={100}/>
 
                 </div>
             </div>

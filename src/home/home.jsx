@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import GoalCard from '../components/goalCard';
 
 
-export function Home({ goals, onDeleteGoal }) {
+export function Home({ goals, onDeleteGoal, onUpdateGoal }) {
 
     const rows = useMemo(() => {
         const copy = [...goals];
@@ -41,7 +41,7 @@ export function Home({ goals, onDeleteGoal }) {
                                     </div>
                                     {personalGoals.map((goal) => (
                                         <div className="row g-3 mb-3" key={goal.id}>
-                                            <GoalCard goal={goal} onDelete={onDeleteGoal} />
+                                            <GoalCard goal={goal} onDelete={onDeleteGoal} onUpdateGoal={onUpdateGoal} />
                                         </div>
                                     ))}
 
@@ -71,7 +71,7 @@ export function Home({ goals, onDeleteGoal }) {
 
                                     {partnerGoals.map((goal) => (
                                         <div className="row g-3 mb-3" key={goal.id}>
-                                            <GoalCard goal={goal} onDelete={onDeleteGoal} />
+                                            <GoalCard goal={goal} onDelete={onDeleteGoal} onUpdate={onUpdateGoal} />
                                         </div>
                                     ))}
 
