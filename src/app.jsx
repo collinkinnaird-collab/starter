@@ -23,6 +23,38 @@ export default function App() {
     ]
 
     const STORAGE_KEY = "goals.v1";
+    const AUTH_KEY = "auth.v1";
+
+    const [auth, setAuth] = useState(() => {
+      try {
+        const raw = localStorage.getItem(AUTH_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        return null;
+      }
+    });
+
+    const isLoggedIn = Boolean(auth?.email);
+
+    useEffect(() => {
+      try {
+        if (auth) {
+          localStorage.setItem(AUTH_KEY, JSON.stringify(auth));
+        } else {
+          localStorage.removeItem(AUTH_KEY);
+        }
+      } catch {
+        console.error("Failed to save auth to localStorage");
+      }
+    }, [auth]);
+
+    function handleLogin({ email, password }) {
+      setAuth({ email, password });
+    }
+
+    function handleLogout() {
+      setAuth(null);
+    }
 
     const [goals, setGoals] = useState(() => {
       try {
@@ -79,13 +111,13 @@ export default function App() {
         </header>
           <Routes>
             <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<Login />} exact />
-            <Route path="/home" element={<Home goals={goals} onDeleteGoal={deleteGoal} onUpdateGoal={updateGoal} />}  />
-            <Route path="/media" element={<Media />} />
-            <Route path="/friends" element={<Friends />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/goalMaker" element={<GoalMaker onAddGoal={handleAddGoal} />} />
-            <Route path="/friends/:id" element={<IndividualFriend />} />
+            <Route path="/login" element={<Login onLogin={handleLogin}/>} exact />
+            <Route path="/home" element={isLoggedIn ? (<Home goals={goals} onDeleteGoal={deleteGoal} onUpdateGoal={updateGoal} />) : (<Navigate to="/login" replace />)} />
+            <Route path="/media" element={isLoggedIn ? (<Media />) : (<Navigate to="/login" replace />)} />
+            <Route path="/friends" element={isLoggedIn ? (<Friends />) : (<Navigate to="/login" replace />)} />
+            <Route path="/settings" element={isLoggedIn ? (<Settings />) : (<Navigate to="/login" replace />)} />
+            <Route path="/goalMaker" element={isLoggedIn ? (<GoalMaker onAddGoal={handleAddGoal} />) : (<Navigate to="/login" replace />)} />
+            <Route path="/friends/:id" element={isLoggedIn ? (<IndividualFriend />) : (<Navigate to="/login" replace />)} />
             <Route path='*' element={<NotFound />} />
           </Routes>
 
