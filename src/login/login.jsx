@@ -1,11 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Login() {
+  const navigate = useNavigate();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    navigate('/home');
+  }
+
   return (
      <main>
 
             <h1> Lets Make Some goals!</h1>
-            <form method="get" action="home.html" className="auth-form">
+            <form onSubmit={handleSubmit} className="auth-form">
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="email" placeholder="123@email.com"/>
