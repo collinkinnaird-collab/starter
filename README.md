@@ -108,8 +108,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - Circles are now dynamic and you can fill them up as you click. you can add and delete goals, each goal has a specific name and type login and password now work with the rest of the app being unaccessable otherwise. This is all the key parts of the app, the rest is bonus, but i will implement that later, for now this is just to get the credit 
+- [x] **Hooks** - i useState, useEffect, useRef, and useMemo, it was fun learning the specific roles of each one, and it all comes together once you get used to it. 
 
 ## 🚀 Service deliverable
 
