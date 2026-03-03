@@ -71,7 +71,7 @@ export function Home({ goals, onDeleteGoal, onUpdateGoal }) {
 
                                     {partnerGoals.map((goal) => (
                                         <div className="row g-3 mb-3" key={goal.id}>
-                                            <GoalCard goal={goal} onDelete={onDeleteGoal} onUpdate={onUpdateGoal} />
+                                            <GoalCard goal={goal} onDelete={onDeleteGoal} onUpdateGoal={onUpdateGoal} />
                                         </div>
                                     ))}
 

@@ -27,7 +27,7 @@ export default function GoalCard({ goal, onDelete, onUpdateGoal}) {
                     <div className="d-flex gap-2 mt-3">
                         <button
                             type="button"
-                            className="btn btn-outliner-danger btn-sm"
+                            className="btn btn-outline-danger btn-sm"
                             onClick={() => onDelete(goal.id)}
                         >
                             Delete

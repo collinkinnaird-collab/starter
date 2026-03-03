@@ -20,8 +20,14 @@ export default function ProgressCircle({
             return Math.max(0, Math.min(max, n));
         }, [percent, max]);
 
+        function setNextPercent(next) {
+            const clamped = Math.max(0, Math.min(max, next));
+            setPercent(clamped);
+            onChange?.(clamped);
+        }
+
         function handleClick() {
-                setPercent((prev) => Math.min(max, prev + step));
+                setNextPercent((prev) => Math.min(max, prev + step));
             }
 
         function handleHoldStart() {
@@ -29,8 +35,10 @@ export default function ProgressCircle({
 
             intervalRef.current = setInterval(() => {
                 setPercent((prev) => {
-                    const next = prev + step;
-                    return next > max ? max : next;
+
+                    const next = Math.max(0, Math.min(max, (Number(prev) || 0) + step));
+                    onChange?.(next);
+                    return next;
                 });
             }, 50);
         }
@@ -45,6 +53,17 @@ export default function ProgressCircle({
                 if (intervalRef.current) clearInterval(intervalRef.current);
             };
         }, []);
+
+        const didMountRef = useRef(false);
+
+        // useEffect(() => {
+        //     if (!didMountRef.current) {
+        //         didMountRef.current = true;
+        //         return
+        //     } else {
+        //         onChange?.(clampedPercent);
+        //     }
+        // }, [clampedPercent, onChange]);
 
     return (
         <button
