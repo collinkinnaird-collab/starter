@@ -78,3 +78,8 @@ Setting up Vite and React was pretty simple. I am so excited to get reactivity g
 So, in css file, make thinks to prevent background objects or other stuff not be dynamic if you want other things to be.
 
 ok, so [variable name, thing that manipulates it] => useState;
+
+
+### Service deliverable 
+
+WHAT!! There are public apis for chatbots. This was so cool. I did need to pay $5, but thats worth, and they'll motify once i reach the limit intead of charging more. The auth stuff was pretty easy actually, i just followed the YT vid. I also wanted rto clean up some of the media, but im already late on this so i'll do more just later

@@ -115,12 +115,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - index.js, server happens on port 4000
+- [x] **Static middleware for frontend** - also in the index.js file. app.use(express.static('public'))
+- [x] **Calls to third party endpoints** - Anthropic API!!! This is so exciting for me, to use it, click the white button with the black star on the top left by the "GOALS" title. Also the bot has been prompted to stick with goal related subject, that way users can get help with their goals if they need
+- [x] **Backend service endpoints** - login, logout, AIchat, goals, and create endpoints
+- [x] **Frontend calls service endpoints** - loging/signup auth create, and AI chat panel (new jsx) calls api. 
+- [x] **Supports registration, login, logout, and restricted endpoint** - theres middleware to restrict access to authenticated users, BCrypt hashed passwords
 
 ## 🚀 DB deliverable
 
