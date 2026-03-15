@@ -1,8 +1,12 @@
+require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
+const Anthropic = require('@anthropic-ai/sdk');
 const app = express();
+
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const authCookieName = 'token';
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -66,6 +70,23 @@ const verifyAuth = async (req, res, next) => {
 // Restricted endpoint — requires authentication
 apiRouter.get('/goals', verifyAuth, (req, res) => {
   res.send({ msg: 'You are authenticated!' });
+});
+
+// AI chat endpoint — requires authentication
+apiRouter.post('/chat', verifyAuth, async (req, res) => {
+  try {
+    const { messages } = req.body;
+    const response = await anthropic.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 300,
+      system: `You are a friendly goal coach inside an app called "Goals". Your job is to help users set, refine, and achieve their goals. Give short, encouraging, actionable advice. Stay on topic — only discuss goals, motivation, habits, and productivity. If someone asks about something unrelated, gently steer them back to goals.`,
+      messages,
+    });
+    res.send({ reply: response.content[0].text });
+  } catch (err) {
+    console.error('Chat error:', err.message);
+    res.status(500).send({ msg: 'AI request failed' });
+  }
 });
 
 // Default error handler

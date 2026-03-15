@@ -9,9 +9,11 @@ import { Media } from './media/media';
 import { Settings} from './settings/settings';
 import { Login } from './login/login';
 import { IndividualFriend } from './friends/indivFriend';
+import AiChat from './components/aiChat';
 
 
 export default function App() {
+    const [chatOpen, setChatOpen] = useState(false);
 
     const DEFAULT_GOALS = [
       { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
@@ -115,6 +117,7 @@ export default function App() {
                   padding: 0,
                 }}
                 title="AI Chat"
+                onClick={() => setChatOpen((v) => !v)}
               >
                 &#9733;
               </button>
@@ -155,6 +158,8 @@ export default function App() {
             <br />
             <a href="https://github.com/collinkinnaird-collab/starter">GitHub</a>
         </footer>
+
+        <AiChat open={chatOpen} onClose={() => setChatOpen(false)} />
   </div>
   </BrowserRouter>
   );
