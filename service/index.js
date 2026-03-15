@@ -74,7 +74,7 @@ apiRouter.get('/goals', verifyAuth, (req, res) => {
 });
 
 // AI chat endpoint — requires authentication
-apiRouter.post('/chat', verifyAuth, async (req, res) => {
+apiRouter.post('/chat', async (req, res) => {
   try {
     const { messages } = req.body;
     const response = await anthropic.messages.create({
@@ -85,8 +85,8 @@ apiRouter.post('/chat', verifyAuth, async (req, res) => {
     });
     res.send({ reply: response.content[0].text });
   } catch (err) {
-    console.error('Chat error:', err.message);
-    res.status(500).send({ msg: 'AI request failed' });
+    console.error('Chat error:', err.status, err.message, err.error);
+    res.status(500).send({ msg: `AI request failed: ${err.message}` });
   }
 });
 

@@ -33,7 +33,8 @@ export default function AiChat({ open, onClose }) {
         const data = await res.json();
         setMessages([...updated, { role: 'assistant', content: data.reply }]);
       } else {
-        setMessages([...updated, { role: 'assistant', content: 'Sorry, something went wrong.' }]);
+        const body = await res.json().catch(() => ({}));
+        setMessages([...updated, { role: 'assistant', content: body.msg || `Error: ${res.status}` }]);
       }
     } catch {
       setMessages([...updated, { role: 'assistant', content: 'Could not reach the server.' }]);
