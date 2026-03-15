@@ -10,18 +10,15 @@ export function Login({ onLogin }) {
     const [error, setError] = useState("");
 
     useEffect(() => {
-      try{
+      try {
         const raw = localStorage.getItem("auth.v1");
         if (!raw) return;
         const parsed = JSON.parse(raw);
         if (parsed?.email) setEmail(parsed.email);
-        if (parsed?.password) setPassword(parsed.password);
-      } catch {
-
-      }
+      } catch {}
     }, []);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     setError("");
 
@@ -31,9 +28,26 @@ export function Login({ onLogin }) {
         return;
     }
 
-    onLogin?.({ email: e, password });
+    const endpoint = mode === "signup" ? "/api/auth/create" : "/api/auth/login";
 
-    navigate('/home');
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: e, password }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        onLogin?.(data);
+        navigate('/home');
+      } else {
+        const body = await res.json();
+        setError(body.msg || "Authentication failed");
+      }
+    } catch (err) {
+      setError("Could not connect to server");
+    }
   }
 
   return (
@@ -53,15 +67,7 @@ export function Login({ onLogin }) {
                     <button type="submit" className={`btn ${mode === "signin" ? "btn-primary" : "btn-secondary"}`} onClick={() => setMode("signin")}>Sign In</button>
                     <button type="submit" className={`btn ${mode === "signup" ? "btn-primary" : "btn-secondary"}`} onClick={() => setMode("signup")}>Sign Up</button>
                 </div>
-                <p>TODO: Make a database to store user info! Important info:</p>
-                <ol>
-                    <li>name</li>
-                    <li>password</li>
-                    <li>friends</li>
-                    <li>goals</li>
-                    <li>journals</li>
-                    <li>likes (part of goals)</li>
-                </ol>
+                {error && <p className="text-danger mt-2">{error}</p>}
             </form>
         </main>
   );

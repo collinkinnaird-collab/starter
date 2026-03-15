@@ -48,11 +48,14 @@ export default function App() {
       }
     }, [auth]);
 
-    function handleLogin({ email, password }) {
-      setAuth({ email, password });
+    function handleLogin({ email }) {
+      setAuth({ email });
     }
 
-    function handleLogout() {
+    async function handleLogout() {
+      try {
+        await fetch('/api/auth/logout', { method: 'DELETE' });
+      } catch {}
       setAuth(null);
     }
 
@@ -105,6 +108,11 @@ export default function App() {
                         <li className="nav-item"><NavLink className="nav-link" to="/media">Media</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" to="/friends">Friends</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" to="/settings">Settings</NavLink></li>
+                        {isLoggedIn && (
+                          <li className="nav-item">
+                            <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
+                          </li>
+                        )}
                     </ul>
                 </menu>
             </nav>

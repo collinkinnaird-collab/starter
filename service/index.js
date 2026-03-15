@@ -63,6 +63,11 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
+// Restricted endpoint — requires authentication
+apiRouter.get('/goals', verifyAuth, (req, res) => {
+  res.send({ msg: 'You are authenticated!' });
+});
+
 // Default error handler
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });
