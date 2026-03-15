@@ -98,7 +98,27 @@ export default function App() {
     <BrowserRouter>
   <div className="app bg-dark text-light">
         <header>
-            <h1 id="site-title">Goals<sup>&reg;</sup></h1>
+            <h1 id="site-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              Goals<sup>&reg;</sup>
+              <button
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  background: 'white',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '16px',
+                  padding: 0,
+                }}
+                title="AI Chat"
+              >
+                &#9733;
+              </button>
+            </h1>
             <nav>
 
                 <menu>
