@@ -16,7 +16,15 @@ export default function GoalCard({ goal, onDelete, onUpdateGoal}) {
             </div>
 
             <div className="col-6">
-                <div className="card p-3 custom h-100 d-flex justify-content-between">
+                <div className="card p-3 custom h-100 d-flex justify-content-between" style={{ position: 'relative' }}>
+                    <button
+                        type="button"
+                        className="btn btn-outline-info btn-sm"
+                        style={{ position: 'absolute', top: '8px', right: '8px' }}
+                        onClick={() => alert(`Published: ${goal.title}`)}
+                    >
+                        Publish
+                    </button>
                     <div>
                         <p className="mb-2">{goal.title}</p>
                         <p className="small text-muted mb-0">
