@@ -38,6 +38,7 @@ export default function App() {
 
     const isLoggedIn = Boolean(auth?.email);
 
+
     useEffect(() => {
       try {
         if (auth) {

@@ -11,23 +11,39 @@ export function GoalMaker({ onAddGoal}) {
 
     const navigate = useNavigate();
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-
         const trimmed = title.trim();
         if(!trimmed) return;
 
-        onAddGoal({
+        const payload = {
             title: trimmed,
             goalType,
             measurement,
             progress: 0,
             isPartner,
-        });
+        };
 
+        try{
+            const url = isPartner ? "/api/partner-goals" : "/api/goals";
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) throw new Error("Failed to create goal");
+            const { goal } = await res.json();
+
+            if (typeof onAddGoal === 'function') onAddGoal(goal);
         setTitle("");
         setIsPartner(false);
         navigate("/home");
+        } catch (err) {
+            console.error('failed to save goal',err);
+            alert("Error creating goal: " + err.message);
+        }
     }
   return (
      <main>
