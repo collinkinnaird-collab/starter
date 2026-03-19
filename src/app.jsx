@@ -14,6 +14,7 @@ import AiChat from './components/aiChat';
 
 export default function App() {
     const [chatOpen, setChatOpen] = useState(false);
+    const [friends, setFriends] = useState([]);
 
     const DEFAULT_GOALS = [
       { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
@@ -119,6 +120,18 @@ export default function App() {
       }
     }
 
+    async function deleteFriend(id) {
+      try {
+        const res = await fetch(`/api/friends/${id}`, {
+          method: 'DELETE',
+        });
+        if (!res.ok) throw new Error("Failed to delete friend");
+        setFriends((prev) => prev.filter((friend) => friend.id !== id));
+      } catch (err) {
+        console.error("Failed to delete friend", err);
+      }
+    }
+
     async function addFriend(friend) {
       try {
         const res = await fetch('/api/friends', {
@@ -200,7 +213,7 @@ export default function App() {
             <Route path="/login" element={<Login onLogin={handleLogin}/>} exact />
             <Route path="/home" element={isLoggedIn ? (<Home goals={goals} onDeleteGoal={deleteGoal} onUpdateGoal={updateGoal} />) : (<Navigate to="/login" replace />)} />
             <Route path="/media" element={isLoggedIn ? (<Media />) : (<Navigate to="/login" replace />)} />
-            <Route path="/friends" element={isLoggedIn ? (<Friends onAddFriend={addFriend} onDeleteFriend={deleteFriend} />) : (<Navigate to="/login" replace />)} />
+            <Route path="/friends" element={isLoggedIn ? (<Friends friends={friends} onAddFriend={addFriend} onDeleteFriend={deleteFriend} />) : (<Navigate to="/login" replace />)} />
             <Route path="/settings" element={isLoggedIn ? (<Settings />) : (<Navigate to="/login" replace />)} />
             <Route path="/goalMaker" element={isLoggedIn ? (<GoalMaker onAddGoal={handleAddGoal} />) : (<Navigate to="/login" replace />)} />
             <Route path="/friends/:id" element={isLoggedIn ? (<IndividualFriend />) : (<Navigate to="/login" replace />)} />
