@@ -37,7 +37,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 apiRouter.get('/friends', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
-    const friends = await DB.getFriend(user.email);
+    const friends = await DB.getFriends(user.email);
     res.send({ friends });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
