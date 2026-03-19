@@ -102,6 +102,23 @@ export default function App() {
       }
     }
 
+    async function handleAddGoal(goal) {
+      try {
+        const res = await fetch('/api/goals', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(goal),
+        });
+        if (!res.ok) throw new Error("Failed to add goal");
+        const data = await res.json();
+        setGoals((prev) => [data, ...prev]);
+      } catch (err) {
+        console.error("Failed to add goal", err);
+      }
+    }
+
   return ( 
     <BrowserRouter>
   <div className="app bg-dark text-light">
