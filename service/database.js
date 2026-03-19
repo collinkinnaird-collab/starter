@@ -38,18 +38,28 @@ async function updateUserRemoveAuth(user) {
   await userCollection.updateOne({ email: user.email }, { $unset: { token: 1 } });
 }
 
-async function addScore(score) {
-  return scoreCollection.insertOne(score);
+async function addPersonalGoal(goal) {
+  await goalCollection.insertOne({ ...goal, type: 'personal' });
 }
 
-function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
-  };
-  const cursor = scoreCollection.find(query, options);
-  return cursor.toArray();
+async function addPartnerGoal(goal) {
+  await goalCollection.insertOne({ ...goal, type: 'partner' });
+}
+
+async function getPersonalGoals() {
+  return goalCollection.find({ type: 'personal' }).toArray();
+}
+
+async function getPartnerGoals() {
+  return goalCollection.find({ type: 'partner' }).toArray();
+}
+
+async function addFriend(friend) {
+  await friendCollection.insertOne(friend);
+}
+
+async function getFriend(email) {
+  return friendCollection.findOne({ email: email });
 }
 
 module.exports = {
@@ -58,6 +68,10 @@ module.exports = {
   addUser,
   updateUser,
   updateUserRemoveAuth,
-  addScore,
-  getHighScores,
+  addPersonalGoal,
+  addPartnerGoal,
+  getPersonalGoals,
+  getPartnerGoals,
+  addFriend,
+  getFriend
 };
