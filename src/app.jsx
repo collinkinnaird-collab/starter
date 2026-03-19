@@ -74,20 +74,8 @@ export default function App() {
     });
 
     useEffect(() => {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(goals));
-      } catch {
-        console.error("Failed to save goals to localStorage");
-      }
-    }, [goals]);
-
-    function handleAddGoal(newGoal) {
-      const goalWithId = {
-        id: crypto.randomUUID(),
-        ...newGoal
-      };
-      setGoals((prev) => [goalWithId, ...prev]);
-    }
+      fetchGoals();
+    }, []);
 
     function deleteGoal(id) {
         setGoals((prev) => prev.filter((goal) => goal.id !== id));
@@ -95,6 +83,23 @@ export default function App() {
 
     function updateGoal(id, patch) {
       setGoals((prev) => prev.map((goal) => goal.id === id ? { ...goal, ...patch } : goal));
+    }
+
+    async function fetchGoals() {
+      try {
+        const res = await fetch('/api/goals', {credentials: 'include'});
+        if (!res.ok) throw new Error("Failed to fetch goals");
+        const data = await res.json();
+        if (data.personalGoals || data.partnerGoals) {
+          const personal = data.personalGoals || [];
+          const partner = data.partnerGoals || [];
+          setGoals([...personal, ...partner]);
+        } else if (Array.isArray(data.goals)) {
+          setGoals(data.goals);
+        }
+      } catch (err) {
+        console.error("Failed to fetch goals", err);
+      }
     }
 
   return ( 
