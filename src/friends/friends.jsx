@@ -1,8 +1,27 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
-export function Friends() {
+export function Friends({ onAddFriend, onDeleteFriend }) {
+
+    const [newFriend, setNewFriend] = useState("");
+    const navigate = useNavigate();
+
+    function handleAddFriend() {
+        onAddFriend({ name: newFriend });
+        setNewFriend("");
+    }   
+
+    function handleDeleteFriend(id) {
+        onDeleteFriend(id);
+        navigate("/friends");
+    }
+
+    <form onSubmit={(e) => { e.preventDefault(); handleAddFriend(); }}>
+        <input type="text" value={newFriend} onChange={(e) => setNewFriend(e.target.value)} placeholder="Add a new friend" />
+        <button type="submit">Add Friend</button>
+    </form>
+
   return (
      <main className="col-12 col-md-10 col-lg-10 p-3">
             <div className="scroll-panel"/>
