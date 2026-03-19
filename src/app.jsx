@@ -119,7 +119,39 @@ export default function App() {
       }
     }
 
-  return ( 
+    async function addFriend(friend) {
+      try {
+        const res = await fetch('/api/friends', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(friend),
+        });
+        if (!res.ok) throw new Error("Failed to add friend");
+        const data = await res.json();
+        setFriends((prev) => [data, ...prev]);
+      } catch (err) {
+        console.error("Failed to add friend", err);
+      }
+    }
+
+    async function fetchFriends() {
+      try {
+        const res = await fetch('/api/friends', { credentials: 'include' });
+        if (!res.ok) throw new Error("Failed to fetch friends");
+        const data = await res.json();
+        setFriends(data);
+      } catch (err) {
+        console.error("Failed to fetch friends", err);
+      }
+    }
+
+    useEffect(() => {
+      fetchFriends();
+    }, []);
+
+  return (
     <BrowserRouter>
   <div className="app bg-dark text-light">
         <header>
@@ -168,7 +200,7 @@ export default function App() {
             <Route path="/login" element={<Login onLogin={handleLogin}/>} exact />
             <Route path="/home" element={isLoggedIn ? (<Home goals={goals} onDeleteGoal={deleteGoal} onUpdateGoal={updateGoal} />) : (<Navigate to="/login" replace />)} />
             <Route path="/media" element={isLoggedIn ? (<Media />) : (<Navigate to="/login" replace />)} />
-            <Route path="/friends" element={isLoggedIn ? (<Friends />) : (<Navigate to="/login" replace />)} />
+            <Route path="/friends" element={isLoggedIn ? (<Friends onAddFriend={addFriend} onDeleteFriend={deleteFriend} />) : (<Navigate to="/login" replace />)} />
             <Route path="/settings" element={isLoggedIn ? (<Settings />) : (<Navigate to="/login" replace />)} />
             <Route path="/goalMaker" element={isLoggedIn ? (<GoalMaker onAddGoal={handleAddGoal} />) : (<Navigate to="/login" replace />)} />
             <Route path="/friends/:id" element={isLoggedIn ? (<IndividualFriend />) : (<Navigate to="/login" replace />)} />
