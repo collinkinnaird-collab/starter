@@ -6,6 +6,7 @@ const express = require('express');
 const uuid = require('uuid');
 const Anthropic = require('@anthropic-ai/sdk');
 const app = express();
+const DB = require('./database');
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
