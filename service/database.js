@@ -5,7 +5,8 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db('simon');
 const userCollection = db.collection('user');
-const scoreCollection = db.collection('score');
+const friendCollection = db.collection('friend');
+const goalCollection = db.collection('goal');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -62,6 +63,10 @@ async function getFriend(email) {
   return friendCollection.findOne({ email: email });
 }
 
+async function getFriends(userEmail) {
+  return friendCollection.find({ user: userEmail }).toArray();
+}
+
 module.exports = {
   getUser,
   getUserByToken,
@@ -73,5 +78,6 @@ module.exports = {
   getPersonalGoals,
   getPartnerGoals,
   addFriend,
-  getFriend
+  getFriend,
+  getFriends
 };
