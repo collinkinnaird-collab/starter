@@ -33,6 +33,28 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
+// get friends
+apiRouter.get('/friends', async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    const friends = await DB.getFriend(user.email);
+    res.send({ friends });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+
+apiRouter.post('/friends', async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    const friend = await DB.addFriend({ email: req.body.email, user: user.email });
+    res.send({ friend });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
   const user = await findUser('email', req.body.email);
@@ -70,8 +92,30 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // Restricted endpoint — requires authentication
-apiRouter.get('/goals', verifyAuth, (req, res) => {
-  res.send({ msg: 'You are authenticated!' });
+apiRouter.get('/goals', verifyAuth, async (req, res) => {
+  const personalGoals = await DB.getPersonalGoals();
+  const partnerGoals = await DB.getPartnerGoals();
+  res.send({ personalGoals, partnerGoals });
+});
+
+apiRouter.post('/goals', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    const goal = await DB.addPersonalGoal({ ...req.body, user: user.email });
+    res.send({ goal });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+apiRouter.post('/partner-goals', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    const goal = await DB.addPartnerGoal({ ...req.body, user: user.email });
+    res.send({ goal });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
 });
 
 // AI chat endpoint — requires authentication
