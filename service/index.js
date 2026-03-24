@@ -99,22 +99,32 @@ apiRouter.get('/goals', verifyAuth, async (req, res) => {
 });
 
 apiRouter.post('/goals', verifyAuth, async (req, res) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
-  if (user) {
-    const goal = await DB.addPersonalGoal({ ...req.body, user: user.email });
-    res.send({ goal });
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
+  try {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+      const goal = await DB.addPersonalGoal({ ...req.body, user: user.email });
+      res.send({ goal });
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (err) {
+    console.error('Error creating goal:', err);
+    res.status(500).send({ msg: 'Failed to create goal' });
   }
 });
 
 apiRouter.post('/partner-goals', verifyAuth, async (req, res) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
-  if (user) {
-    const goal = await DB.addPartnerGoal({ ...req.body, user: user.email });
-    res.send({ goal });
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
+  try {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+      const goal = await DB.addPartnerGoal({ ...req.body, user: user.email });
+      res.send({ goal });
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (err) {
+    console.error('Error creating partner goal:', err);
+    res.status(500).send({ msg: 'Failed to create goal' });
   }
 });
 

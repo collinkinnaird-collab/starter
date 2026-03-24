@@ -3,7 +3,7 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('simon');
+const db = client.db('goals');
 const userCollection = db.collection('user');
 const friendCollection = db.collection('friend');
 const goalCollection = db.collection('goal');
@@ -40,11 +40,15 @@ async function updateUserRemoveAuth(user) {
 }
 
 async function addPersonalGoal(goal) {
-  await goalCollection.insertOne({ ...goal, type: 'personal' });
+  const doc = { ...goal, type: 'personal' };
+  const result = await goalCollection.insertOne(doc);
+  return { ...doc, _id: result.insertedId };
 }
 
 async function addPartnerGoal(goal) {
-  await goalCollection.insertOne({ ...goal, type: 'partner' });
+  const doc = { ...goal, type: 'partner' };
+  const result = await goalCollection.insertOne(doc);
+  return { ...doc, _id: result.insertedId };
 }
 
 async function getPersonalGoals() {
