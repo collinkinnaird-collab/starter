@@ -83,3 +83,10 @@ ok, so [variable name, thing that manipulates it] => useState;
 ### Service deliverable 
 
 WHAT!! There are public apis for chatbots. This was so cool. I did need to pay $5, but thats worth, and they'll motify once i reach the limit intead of charging more. The auth stuff was pretty easy actually, i just followed the YT vid. I also wanted rto clean up some of the media, but im already late on this so i'll do more just later
+
+
+😁 
+
+### Database deliverable 
+
+Ok, this is pretty straightfoward, I have done db before, a bug I had though was the two different ID's I was using, mongo db had the same id for all goals and my frontend had differnt ones. Becuase of this, each goal was treated as the same regarding progess and goal type. So that was good to learn. I also learned that I HAVE A LOT TO KEEP TRACK OF FOR EACH USER. much more than I thought. I implemented one for now (goals) just to submit on time, but I will do the rest later to make it work nice"ish" for the final deliverable. 

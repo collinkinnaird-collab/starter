@@ -126,8 +126,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** -  Goals are stored in the goal collection — addPersonalGoal() and addPartnerGoal() insert into MongoDB, getPersonalGoals() and getPartnerGoals() read from it
+- [x] **Stores credentials in MongoDB** - regiateration, login, logout, and authorization are stored in mongodb and hashed, whena. user logs in again, or creates an accuont, their info is stored. 
 
 ## 🚀 WebSocket deliverable
 
