@@ -63,7 +63,7 @@ export function Home({ goals, onDeleteGoal, onUpdateGoal }) {
                                             <div className="card g-3 custom">
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <p className="mb-0">Partner Goals</p>
-                                                    <NavLink className="btn btn-outline-info" to="/goalMaker">New Partner Goal +</NavLink>
+                                                    <NavLink className="btn btn-outline-info" to="/goalMaker?partner=true">New Partner Goal +</NavLink>
                                                 </div>
                                             </div>
                                         </div>

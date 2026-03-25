@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 
 
 export function GoalMaker({ onAddGoal}) {
 
+    const [searchParams] = useSearchParams();
     const [goalType, setGoalType] = useState("physical");
     const [measurement, setMeasurement] = useState("count");
     const [title, setTitle] = useState("");
-    const [isPartner, setIsPartner] = useState(false);
+    const [isPartner, setIsPartner] = useState(searchParams.get('partner') === 'true');
 
     const navigate = useNavigate();
 
