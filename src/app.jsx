@@ -79,11 +79,19 @@ export default function App() {
     }, []);
 
     function deleteGoal(id) {
-        setGoals((prev) => prev.filter((goal) => goal.id !== id));
+        setGoals((prev) => prev.filter((goal) => goal.id !== id && goal._id !== id));
     }
 
     function updateGoal(id, patch) {
-      setGoals((prev) => prev.map((goal) => goal.id === id ? { ...goal, ...patch } : goal));
+      setGoals((prev) => prev.map((goal) => (goal.id === id || goal._id === id) ? { ...goal, ...patch } : goal));
+    }
+
+    function normalizeGoal(g) {
+      return {
+        ...g,
+        id: g.id || g._id,
+        isPartner: g.isPartner === true || g.type === 'partner',
+      };
     }
 
     async function fetchGoals() {
@@ -92,32 +100,20 @@ export default function App() {
         if (!res.ok) throw new Error("Failed to fetch goals");
         const data = await res.json();
         if (data.personalGoals || data.partnerGoals) {
-          const personal = data.personalGoals || [];
-          const partner = data.partnerGoals || [];
+          const personal = (data.personalGoals || []).map(normalizeGoal);
+          const partner = (data.partnerGoals || []).map(normalizeGoal);
           setGoals([...personal, ...partner]);
         } else if (Array.isArray(data.goals)) {
-          setGoals(data.goals);
+          setGoals(data.goals.map(normalizeGoal));
         }
       } catch (err) {
         console.error("Failed to fetch goals", err);
       }
     }
 
-    async function handleAddGoal(goal) {
-      try {
-        const res = await fetch('/api/goals', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(goal),
-        });
-        if (!res.ok) throw new Error("Failed to add goal");
-        const data = await res.json();
-        setGoals((prev) => [data, ...prev]);
-      } catch (err) {
-        console.error("Failed to add goal", err);
-      }
+    function handleAddGoal(goal) {
+      if (!goal) return;
+      setGoals((prev) => [normalizeGoal(goal), ...prev]);
     }
 
     async function deleteFriend(id) {

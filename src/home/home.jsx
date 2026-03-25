@@ -40,7 +40,7 @@ export function Home({ goals, onDeleteGoal, onUpdateGoal }) {
                                         </div>
                                     </div>
                                     {personalGoals.map((goal) => (
-                                        <div className="row g-3 mb-3" key={goal.id}>
+                                        <div className="row g-3 mb-3" key={goal.id || goal._id}>
                                             <GoalCard goal={goal} onDelete={onDeleteGoal} onUpdateGoal={onUpdateGoal} />
                                         </div>
                                     ))}
@@ -70,7 +70,7 @@ export function Home({ goals, onDeleteGoal, onUpdateGoal }) {
                                     </div>
 
                                     {partnerGoals.map((goal) => (
-                                        <div className="row g-3 mb-3" key={goal.id}>
+                                        <div className="row g-3 mb-3" key={goal.id || goal._id}>
                                             <GoalCard goal={goal} onDelete={onDeleteGoal} onUpdateGoal={onUpdateGoal} />
                                         </div>
                                     ))}
