@@ -197,8 +197,11 @@ apiRouter.get('/published-goals', async (_req, res) => {
 
 // Restricted endpoint — requires authentication
 apiRouter.get('/goals', verifyAuth, async (req, res) => {
-  const personalGoals = await DB.getPersonalGoals();
-  const partnerGoals = await DB.getPartnerGoals();
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+  const personalGoals = await DB.getPersonalGoals(user.email);
+  const partnerGoals = await DB.getPartnerGoals(user.email);
   const publishedGoals = await DB.getPublishedGoals();
   const publishedGoalIds = new Set(publishedGoals.map((p) => p.goalId));
 

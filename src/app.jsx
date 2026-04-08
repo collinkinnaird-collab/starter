@@ -54,29 +54,37 @@ export default function App() {
 
     function handleLogin({ email }) {
       setAuth({ email });
+      // Clear stale goals and fetch fresh ones for this user
+      localStorage.removeItem(STORAGE_KEY);
+      setGoals([]);
+      setTimeout(() => fetchGoals(), 0);
     }
 
     async function handleLogout() {
       try {
         await fetch('/api/auth/logout', { method: 'DELETE' });
       } catch {}
+      localStorage.removeItem(STORAGE_KEY);
+      setGoals([]);
       setAuth(null);
     }
 
     const [goals, setGoals] = useState(() => {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return DEFAULT_GOALS;
+        if (!raw) return [];
         const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed : DEFAULT_GOALS;
+        return Array.isArray(parsed) ? parsed : [];
       } catch {
-        return DEFAULT_GOALS;
+        return [];
       }
     });
 
     useEffect(() => {
-      fetchGoals();
-    }, []);
+      if (isLoggedIn) {
+        fetchGoals();
+      }
+    }, [isLoggedIn]);
 
     function deleteGoal(id) {
         setGoals((prev) => prev.filter((goal) => goal.id !== id && goal._id !== id));

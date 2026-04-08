@@ -52,12 +52,12 @@ async function addPartnerGoal(goal) {
   return { ...doc, _id: result.insertedId };
 }
 
-async function getPersonalGoals() {
-  return goalCollection.find({ type: 'personal' }).toArray();
+async function getPersonalGoals(userEmail) {
+  return goalCollection.find({ type: 'personal', user: userEmail }).toArray();
 }
 
-async function getPartnerGoals() {
-  return goalCollection.find({ type: 'partner' }).toArray();
+async function getPartnerGoals(userEmail) {
+  return goalCollection.find({ type: 'partner', user: userEmail }).toArray();
 }
 
 async function addFriend(friend) {
