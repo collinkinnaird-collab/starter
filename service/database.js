@@ -60,6 +60,14 @@ async function getPartnerGoals(userEmail) {
   return goalCollection.find({ type: 'partner', user: userEmail }).toArray();
 }
 
+async function updateGoalProgress(goalId, progress) {
+  const { ObjectId } = require('mongodb');
+  await goalCollection.updateOne(
+    { _id: new ObjectId(goalId) },
+    { $set: { progress } }
+  );
+}
+
 async function addFriend(friend) {
   await friendCollection.insertOne(friend);
 }
@@ -89,13 +97,11 @@ async function getPublishedGoals() {
   return publishedCollection.find({}).sort({ publishedAt: -1 }).toArray();
 }
 
-async function updatePublishedGoalProgress(id, progress) {
-  const { ObjectId } = require('mongodb');
+async function updatePublishedGoalProgress(goalId, progress) {
   await publishedCollection.updateOne(
-    { _id: new ObjectId(id) },
+    { goalId },
     { $set: { progress } }
   );
-  return { _id: id, progress };
 }
 
 module.exports = {
@@ -108,6 +114,7 @@ module.exports = {
   addPartnerGoal,
   getPersonalGoals,
   getPartnerGoals,
+  updateGoalProgress,
   addFriend,
   getFriend,
   getFriends,

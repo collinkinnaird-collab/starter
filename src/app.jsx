@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, Navigate, NavLink, Route, Routes } from 'react-router-dom';
@@ -90,8 +90,23 @@ export default function App() {
         setGoals((prev) => prev.filter((goal) => goal.id !== id && goal._id !== id));
     }
 
+    const progressTimers = useRef({});
+
     function updateGoal(id, patch) {
       setGoals((prev) => prev.map((goal) => (goal.id === id || goal._id === id) ? { ...goal, ...patch } : goal));
+
+      // Debounce saving progress to the database (progress circle fires rapidly)
+      if (patch.progress !== undefined) {
+        clearTimeout(progressTimers.current[id]);
+        progressTimers.current[id] = setTimeout(() => {
+          fetch(`/api/goal-progress/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ progress: patch.progress }),
+          }).catch((err) => console.error('Failed to save progress:', err));
+        }, 300);
+      }
     }
 
     function normalizeGoal(g) {

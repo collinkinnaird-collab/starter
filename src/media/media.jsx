@@ -29,7 +29,7 @@ export function Media() {
             } else if (event.type === GoalEvent.GoalProgressUpdate) {
                 setPosts((prev) =>
                     prev.map((p) =>
-                        (p._id === event.value._id)
+                        (p.goalId === event.value.goalId)
                             ? { ...p, progress: event.value.progress }
                             : p
                     )

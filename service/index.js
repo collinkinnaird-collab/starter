@@ -227,6 +227,37 @@ apiRouter.post('/goals', verifyAuth, async (req, res) => {
   }
 });
 
+// Update goal progress
+apiRouter.put('/goal-progress/:id', verifyAuth, async (req, res) => {
+  try {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+    const { progress } = req.body;
+    await DB.updateGoalProgress(req.params.id, progress);
+
+    // Also update any published version of this goal
+    await DB.updatePublishedGoalProgress(req.params.id, progress);
+
+    // Broadcast progress update for the media page
+    const event = JSON.stringify({
+      from: user.email,
+      type: 'goalProgressUpdate',
+      value: { goalId: req.params.id, progress },
+    });
+    wss.clients.forEach((client) => {
+      if (client.readyState === 1) {
+        client.send(event);
+      }
+    });
+
+    res.send({ msg: 'Updated' });
+  } catch (err) {
+    console.error('Error updating goal progress:', err);
+    res.status(500).send({ msg: 'Failed to update progress' });
+  }
+});
+
 apiRouter.post('/partner-goals', verifyAuth, async (req, res) => {
   try {
     const user = await findUser('token', req.cookies[authCookieName]);
