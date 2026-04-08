@@ -11,7 +11,7 @@ export function Media() {
 
     async function fetchPublishedGoals() {
         try {
-            const res = await fetch('/api/goals/published', { credentials: 'include' });
+            const res = await fetch('/api/published-goals', { credentials: 'include' });
             if (!res.ok) throw new Error('Failed to fetch');
             const data = await res.json();
             setPosts(data.published || []);

@@ -8,7 +8,7 @@ export default function GoalCard({ goal, onDelete, onUpdateGoal}) {
     async function handlePublish() {
         setPublishing(true);
         try {
-            const res = await fetch('/api/goals/publish', {
+            const res = await fetch('/api/publish-goal', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

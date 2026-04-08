@@ -96,8 +96,8 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
-// Publish a goal (must be before generic /goals routes)
-apiRouter.post('/goals/publish', verifyAuth, async (req, res) => {
+// Publish a goal
+apiRouter.post('/publish-goal', verifyAuth, async (req, res) => {
   try {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (!user) return res.status(401).send({ msg: 'Unauthorized' });
@@ -130,7 +130,7 @@ apiRouter.post('/goals/publish', verifyAuth, async (req, res) => {
 });
 
 // Update progress on a published goal
-apiRouter.put('/goals/publish/:id', verifyAuth, async (req, res) => {
+apiRouter.put('/publish-goal/:id', verifyAuth, async (req, res) => {
   try {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (!user) return res.status(401).send({ msg: 'Unauthorized' });
@@ -158,7 +158,7 @@ apiRouter.put('/goals/publish/:id', verifyAuth, async (req, res) => {
 });
 
 // Get all published goals
-apiRouter.get('/goals/published', async (_req, res) => {
+apiRouter.get('/published-goals', async (_req, res) => {
   try {
     const published = await DB.getPublishedGoals();
     res.send({ published });
