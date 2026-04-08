@@ -68,6 +68,14 @@ async function updateGoalProgress(goalId, progress) {
   );
 }
 
+async function getRandomUsers(excludeEmail, limit = 10) {
+  return userCollection.aggregate([
+    { $match: { email: { $ne: excludeEmail } } },
+    { $sample: { size: limit } },
+    { $project: { email: 1, _id: 1 } },
+  ]).toArray();
+}
+
 async function addFriend(friend) {
   await friendCollection.insertOne(friend);
 }
@@ -115,6 +123,7 @@ module.exports = {
   getPersonalGoals,
   getPartnerGoals,
   updateGoalProgress,
+  getRandomUsers,
   addFriend,
   getFriend,
   getFriends,

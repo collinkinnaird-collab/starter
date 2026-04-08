@@ -50,6 +50,26 @@ apiRouter.get('/friends', async (req, res) => {
 });
 
 
+// Get friend suggestions (random users)
+apiRouter.get('/friend-suggestions', async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+  try {
+    const friends = await DB.getFriends(user.email);
+    const friendEmails = new Set(friends.map((f) => f.email));
+    friendEmails.add(user.email);
+
+    let suggestions = await DB.getRandomUsers(user.email, 20);
+    // Filter out existing friends
+    suggestions = suggestions.filter((s) => !friendEmails.has(s.email));
+    res.send({ suggestions: suggestions.slice(0, 10) });
+  } catch (err) {
+    console.error('Error getting suggestions:', err);
+    res.status(500).send({ msg: 'Failed to get suggestions' });
+  }
+});
+
 apiRouter.post('/friends', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
