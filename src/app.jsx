@@ -183,7 +183,7 @@ export default function App() {
           method: 'DELETE',
         });
         if (!res.ok) throw new Error("Failed to delete friend");
-        setFriends((prev) => prev.filter((friend) => friend.id !== id));
+        setFriends((prev) => prev.filter((friend) => friend._id !== id));
       } catch (err) {
         console.error("Failed to delete friend", err);
       }
@@ -251,15 +251,19 @@ export default function App() {
 
                 <menu>
                     <ul className="nav nav-underline justify-content-center">
-                        <li className="nav-item"><NavLink className="nav-link" to="/login">Login</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/home">Home</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/media">Media</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/friends">Friends</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/settings">Settings</NavLink></li>
+                        {!isLoggedIn && (
+                          <li className="nav-item"><NavLink className="nav-link" to="/login">Login</NavLink></li>
+                        )}
                         {isLoggedIn && (
-                          <li className="nav-item">
-                            <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
-                          </li>
+                          <>
+                            <li className="nav-item"><NavLink className="nav-link" to="/home">Home</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link" to="/media">Media</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link" to="/friends">Friends</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link" to="/settings">Settings</NavLink></li>
+                            <li className="nav-item">
+                              <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
+                            </li>
+                          </>
                         )}
                     </ul>
                 </menu>
@@ -267,7 +271,7 @@ export default function App() {
         </header>
           <Routes>
             <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<Login onLogin={handleLogin}/>} exact />
+            <Route path="/login" element={isLoggedIn ? (<Navigate to="/home" replace />) : (<Login onLogin={handleLogin}/>)} />
             <Route path="/home" element={isLoggedIn ? (<Home goals={goals} onDeleteGoal={deleteGoal} onUpdateGoal={updateGoal} avatar={avatar} />) : (<Navigate to="/login" replace />)} />
             <Route path="/media" element={isLoggedIn ? (<Media />) : (<Navigate to="/login" replace />)} />
             <Route path="/friends" element={isLoggedIn ? (<Friends friends={friends} onAddFriend={addFriend} onDeleteFriend={deleteFriend} />) : (<Navigate to="/login" replace />)} />

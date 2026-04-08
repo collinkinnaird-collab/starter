@@ -67,6 +67,20 @@ apiRouter.get('/friends', async (req, res) => {
 });
 
 
+// Delete a friend
+apiRouter.delete('/friends/:id', async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+  try {
+    await DB.deleteFriend(req.params.id);
+    res.send({ msg: 'Deleted' });
+  } catch (err) {
+    console.error('Error deleting friend:', err);
+    res.status(500).send({ msg: 'Failed to delete friend' });
+  }
+});
+
 // Get friend suggestions (random users)
 apiRouter.get('/friend-suggestions', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);

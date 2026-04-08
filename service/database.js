@@ -124,6 +124,11 @@ async function getFriendGoals(friendEmail, currentUserEmail) {
   return { personalGoals, partnerGoals };
 }
 
+async function deleteFriend(id) {
+  const { ObjectId } = require('mongodb');
+  await friendCollection.deleteOne({ _id: new ObjectId(id) });
+}
+
 async function getFriends(userEmail) {
   return friendCollection.find({ user: userEmail }).toArray();
 }
@@ -178,6 +183,7 @@ module.exports = {
   getFriend,
   getFriendById,
   getFriendGoals,
+  deleteFriend,
   getFriends,
   publishGoal,
   unpublishGoal,
