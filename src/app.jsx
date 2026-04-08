@@ -242,7 +242,7 @@ export default function App() {
             <Route path="/media" element={isLoggedIn ? (<Media />) : (<Navigate to="/login" replace />)} />
             <Route path="/friends" element={isLoggedIn ? (<Friends friends={friends} onAddFriend={addFriend} onDeleteFriend={deleteFriend} />) : (<Navigate to="/login" replace />)} />
             <Route path="/settings" element={isLoggedIn ? (<Settings />) : (<Navigate to="/login" replace />)} />
-            <Route path="/goalMaker" element={isLoggedIn ? (<GoalMaker onAddGoal={handleAddGoal} />) : (<Navigate to="/login" replace />)} />
+            <Route path="/goalMaker" element={isLoggedIn ? (<GoalMaker onAddGoal={handleAddGoal} friends={friends} />) : (<Navigate to="/login" replace />)} />
             <Route path="/friends/:id" element={isLoggedIn ? (<IndividualFriend />) : (<Navigate to="/login" replace />)} />
             <Route path='*' element={<NotFound />} />
           </Routes>

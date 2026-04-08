@@ -96,8 +96,8 @@ async function getFriendGoals(friendEmail, currentUserEmail) {
   const partnerGoals = await goalCollection.find({
     type: 'partner',
     $or: [
-      { user: friendEmail },
-      { user: currentUserEmail },
+      { user: friendEmail, partnerEmail: currentUserEmail },
+      { user: currentUserEmail, partnerEmail: friendEmail },
     ],
   }).toArray();
   return { personalGoals, partnerGoals };

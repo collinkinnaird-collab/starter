@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 
 
-export function GoalMaker({ onAddGoal}) {
+export function GoalMaker({ onAddGoal, friends = [] }) {
 
     const [searchParams] = useSearchParams();
     const [goalType, setGoalType] = useState("physical");
     const [measurement, setMeasurement] = useState("count");
     const [title, setTitle] = useState("");
     const [isPartner, setIsPartner] = useState(searchParams.get('partner') === 'true');
+    const [selectedFriend, setSelectedFriend] = useState("");
 
     const navigate = useNavigate();
 
@@ -17,12 +18,18 @@ export function GoalMaker({ onAddGoal}) {
         const trimmed = title.trim();
         if(!trimmed) return;
 
+        if (isPartner && !selectedFriend) {
+            alert("Please select a friend for this partner goal");
+            return;
+        }
+
         const payload = {
             title: trimmed,
             goalType,
             measurement,
             progress: 0,
             isPartner,
+            ...(isPartner && { partnerEmail: selectedFriend }),
         };
 
         try{
@@ -40,6 +47,7 @@ export function GoalMaker({ onAddGoal}) {
             if (typeof onAddGoal === 'function') onAddGoal(goal);
         setTitle("");
         setIsPartner(false);
+        setSelectedFriend("");
         navigate("/home");
         } catch (err) {
             console.error('failed to save goal',err);
@@ -52,7 +60,7 @@ export function GoalMaker({ onAddGoal}) {
                 <menu>
                     <li><NavLink className="btn btn-outline-light" to="/home">Back</NavLink></li>
                 </menu>
-                <p> 
+                <p>
                     Try making a goal that will push you a little bit, make sure it is something measurable
                 </p>
                 <form onSubmit={handleSubmit}>
@@ -89,9 +97,32 @@ export function GoalMaker({ onAddGoal}) {
               Partner goal
             </label>
           </div>
-          
-                <button 
-                    className="btn btn-outline-light"
+
+          {isPartner && (
+            <div className="mt-3">
+              <label className="form-label">Choose a friend:</label>
+              {friends.length === 0 ? (
+                <p className="small text-muted">No friends yet — <NavLink to="/friends">add some friends first</NavLink></p>
+              ) : (
+                <div className="list-group">
+                  {friends.map((friend) => (
+                    <button
+                      key={friend._id || friend.email}
+                      type="button"
+                      className={`list-group-item list-group-item-action d-flex align-items-center gap-2 ${selectedFriend === friend.email ? 'active' : ''}`}
+                      onClick={() => setSelectedFriend(friend.email)}
+                    >
+                      <img src="/images/image_2.png" alt={friend.email} width="24" height="24" className="rounded-circle" />
+                      {friend.email}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+                <button
+                    className="btn btn-outline-light mt-3"
                     type="submit"
                 >
                 Create Goal</button>
