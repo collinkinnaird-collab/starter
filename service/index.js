@@ -97,6 +97,38 @@ apiRouter.post('/friends', async (req, res) => {
   }
 });
 
+// Get current user's avatar
+apiRouter.get('/user/avatar', async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+  const avatar = await DB.getUserAvatar(user.email);
+  res.send({ avatar });
+});
+
+// Update avatar
+apiRouter.put('/user/avatar', async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+  const { avatar } = req.body;
+  await DB.updateUserAvatar(user.email, avatar);
+  await DB.updatePublishedGoalAvatar(user.email, avatar);
+
+  // Broadcast avatar change via WebSocket
+  const event = JSON.stringify({
+    from: user.email,
+    type: 'avatarChanged',
+    value: { email: user.email, avatar },
+  });
+  wss.clients.forEach((client) => {
+    if (client.readyState === 1) {
+      client.send(event);
+    }
+  });
+
+  res.send({ avatar });
+});
+
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
   const user = await findUser('email', req.body.email);
@@ -140,11 +172,13 @@ apiRouter.post('/publish-goal', verifyAuth, async (req, res) => {
     if (!user) return res.status(401).send({ msg: 'Unauthorized' });
 
     const { goalId, title, progress } = req.body;
+    const avatar = await DB.getUserAvatar(user.email);
     const published = await DB.publishGoal({
       goalId,
       title,
       progress,
       user: user.email,
+      avatar,
     });
 
     // Broadcast to all connected WebSocket clients

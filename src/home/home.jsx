@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import GoalCard from '../components/goalCard';
 
 
-export function Home({ goals, onDeleteGoal, onUpdateGoal }) {
+export function Home({ goals, onDeleteGoal, onUpdateGoal, avatar }) {
 
     const rows = useMemo(() => {
         const copy = [...goals];
@@ -20,7 +20,7 @@ export function Home({ goals, onDeleteGoal, onUpdateGoal }) {
             <div className="container-fluid">
                 <div className="row">
                     <aside className="col-12 col-md-3 col-lg-2 border-end p-3 sticky-sidebar">
-                        <img src="/images/image_1.png" className="img-fluid rounded-circle mb-3" alt="settings" width="250" />
+                        <img src={avatar || "/images/image_1.png"} className="img-fluid rounded-circle mb-3" alt="avatar" width="250" />
                         <p className="small">User Name</p>
                     </aside>
 

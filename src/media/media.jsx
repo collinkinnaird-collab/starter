@@ -26,6 +26,14 @@ export function Media() {
                 setPosts((prev) => [event.value, ...prev]);
             } else if (event.type === GoalEvent.GoalUnpublished) {
                 setPosts((prev) => prev.filter((p) => p.goalId !== event.value.goalId));
+            } else if (event.type === GoalEvent.AvatarChanged) {
+                setPosts((prev) =>
+                    prev.map((p) =>
+                        (p.user === event.value.email)
+                            ? { ...p, avatar: event.value.avatar }
+                            : p
+                    )
+                );
             } else if (event.type === GoalEvent.GoalProgressUpdate) {
                 setPosts((prev) =>
                     prev.map((p) =>
@@ -76,7 +84,7 @@ export function Media() {
                             <div className="card p-3 custom h-100 d-flex justify-content-between">
                                 <div>
                                     <div className="d-flex align-items-center gap-2 mb-2">
-                                        <img src="/images/image_1.png" alt={post.user} width="28" height="28" className="rounded-circle" />
+                                        <img src={post.avatar || "/images/image_1.png"} alt={post.user} width="28" height="28" className="rounded-circle" />
                                         <span className="small text-muted">{post.user}</span>
                                     </div>
                                     <p className="mb-0">{post.title}</p>

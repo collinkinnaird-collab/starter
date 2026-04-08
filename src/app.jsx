@@ -15,6 +15,7 @@ import AiChat from './components/aiChat';
 export default function App() {
     const [chatOpen, setChatOpen] = useState(false);
     const [friends, setFriends] = useState([]);
+    const [avatar, setAvatar] = useState('/images/image_1.png');
 
     const DEFAULT_GOALS = [
       { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
@@ -57,7 +58,10 @@ export default function App() {
       // Clear stale goals and fetch fresh ones for this user
       localStorage.removeItem(STORAGE_KEY);
       setGoals([]);
-      setTimeout(() => fetchGoals(), 0);
+      setTimeout(() => {
+        fetchGoals();
+        fetchAvatar();
+      }, 0);
     }
 
     async function handleLogout() {
@@ -66,7 +70,32 @@ export default function App() {
       } catch {}
       localStorage.removeItem(STORAGE_KEY);
       setGoals([]);
+      setAvatar('/images/image_1.png');
       setAuth(null);
+    }
+
+    async function fetchAvatar() {
+      try {
+        const res = await fetch('/api/user/avatar', { credentials: 'include' });
+        if (!res.ok) return;
+        const data = await res.json();
+        setAvatar(data.avatar);
+      } catch {}
+    }
+
+    async function handleAvatarChange(newAvatar) {
+      try {
+        const res = await fetch('/api/user/avatar', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ avatar: newAvatar }),
+        });
+        if (!res.ok) throw new Error('Failed to update avatar');
+        setAvatar(newAvatar);
+      } catch (err) {
+        console.error('Failed to update avatar:', err);
+      }
     }
 
     const [goals, setGoals] = useState(() => {
@@ -83,6 +112,7 @@ export default function App() {
     useEffect(() => {
       if (isLoggedIn) {
         fetchGoals();
+        fetchAvatar();
       }
     }, [isLoggedIn]);
 
@@ -238,10 +268,10 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login onLogin={handleLogin}/>} exact />
-            <Route path="/home" element={isLoggedIn ? (<Home goals={goals} onDeleteGoal={deleteGoal} onUpdateGoal={updateGoal} />) : (<Navigate to="/login" replace />)} />
+            <Route path="/home" element={isLoggedIn ? (<Home goals={goals} onDeleteGoal={deleteGoal} onUpdateGoal={updateGoal} avatar={avatar} />) : (<Navigate to="/login" replace />)} />
             <Route path="/media" element={isLoggedIn ? (<Media />) : (<Navigate to="/login" replace />)} />
             <Route path="/friends" element={isLoggedIn ? (<Friends friends={friends} onAddFriend={addFriend} onDeleteFriend={deleteFriend} />) : (<Navigate to="/login" replace />)} />
-            <Route path="/settings" element={isLoggedIn ? (<Settings />) : (<Navigate to="/login" replace />)} />
+            <Route path="/settings" element={isLoggedIn ? (<Settings avatar={avatar} onAvatarChange={handleAvatarChange} />) : (<Navigate to="/login" replace />)} />
             <Route path="/goalMaker" element={isLoggedIn ? (<GoalMaker onAddGoal={handleAddGoal} friends={friends} />) : (<Navigate to="/login" replace />)} />
             <Route path="/friends/:id" element={isLoggedIn ? (<IndividualFriend />) : (<Navigate to="/login" replace />)} />
             <Route path='*' element={<NotFound />} />

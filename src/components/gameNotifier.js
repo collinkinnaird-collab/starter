@@ -3,6 +3,7 @@ const GoalEvent = {
   GoalPublished: 'goalPublished',
   GoalUnpublished: 'goalUnpublished',
   GoalProgressUpdate: 'goalProgressUpdate',
+  AvatarChanged: 'avatarChanged',
 };
 
 class EventMessage {

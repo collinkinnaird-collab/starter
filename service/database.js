@@ -36,6 +36,27 @@ async function updateUser(user) {
   await userCollection.updateOne({ email: user.email }, { $set: user });
 }
 
+async function updateUserAvatar(email, avatar) {
+  await userCollection.updateOne({ email }, { $set: { avatar } });
+}
+
+async function getUserAvatar(email) {
+  const user = await userCollection.findOne({ email }, { projection: { avatar: 1 } });
+  return user?.avatar || '/images/image_1.png';
+}
+
+async function getUserAvatars(emails) {
+  const users = await userCollection.find(
+    { email: { $in: emails } },
+    { projection: { email: 1, avatar: 1 } }
+  ).toArray();
+  const map = {};
+  for (const u of users) {
+    map[u.email] = u.avatar || '/images/image_1.png';
+  }
+  return map;
+}
+
 async function updateUserRemoveAuth(user) {
   await userCollection.updateOne({ email: user.email }, { $unset: { token: 1 } });
 }
@@ -124,6 +145,13 @@ async function getPublishedGoals() {
   return publishedCollection.find({}).sort({ publishedAt: -1 }).toArray();
 }
 
+async function updatePublishedGoalAvatar(userEmail, avatar) {
+  await publishedCollection.updateMany(
+    { user: userEmail },
+    { $set: { avatar } }
+  );
+}
+
 async function updatePublishedGoalProgress(goalId, progress) {
   await publishedCollection.updateOne(
     { goalId },
@@ -136,6 +164,9 @@ module.exports = {
   getUserByToken,
   addUser,
   updateUser,
+  updateUserAvatar,
+  getUserAvatar,
+  getUserAvatars,
   updateUserRemoveAuth,
   addPersonalGoal,
   addPartnerGoal,
@@ -151,5 +182,6 @@ module.exports = {
   publishGoal,
   unpublishGoal,
   getPublishedGoals,
+  updatePublishedGoalAvatar,
   updatePublishedGoalProgress,
 };
