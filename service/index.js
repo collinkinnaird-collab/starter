@@ -38,6 +38,23 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
+// Get a specific friend's goals
+apiRouter.get('/friend-goals/:id', async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+  try {
+    const friend = await DB.getFriendById(req.params.id);
+    if (!friend) return res.status(404).send({ msg: 'Friend not found' });
+
+    const { personalGoals, partnerGoals } = await DB.getFriendGoals(friend.email, user.email);
+    res.send({ friendEmail: friend.email, personalGoals, partnerGoals });
+  } catch (err) {
+    console.error('Error fetching friend goals:', err);
+    res.status(500).send({ msg: 'Failed to fetch friend goals' });
+  }
+});
+
 // get friends
 apiRouter.get('/friends', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);

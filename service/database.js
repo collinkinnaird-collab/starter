@@ -84,6 +84,25 @@ async function getFriend(email) {
   return friendCollection.findOne({ email: email });
 }
 
+async function getFriendById(id) {
+  const { ObjectId } = require('mongodb');
+  return friendCollection.findOne({ _id: new ObjectId(id) });
+}
+
+async function getFriendGoals(friendEmail, currentUserEmail) {
+  // Friend's personal goals (read-only view)
+  const personalGoals = await goalCollection.find({ type: 'personal', user: friendEmail }).toArray();
+  // Partner goals shared between the friend and the current user
+  const partnerGoals = await goalCollection.find({
+    type: 'partner',
+    $or: [
+      { user: friendEmail },
+      { user: currentUserEmail },
+    ],
+  }).toArray();
+  return { personalGoals, partnerGoals };
+}
+
 async function getFriends(userEmail) {
   return friendCollection.find({ user: userEmail }).toArray();
 }
@@ -126,6 +145,8 @@ module.exports = {
   getRandomUsers,
   addFriend,
   getFriend,
+  getFriendById,
+  getFriendGoals,
   getFriends,
   publishGoal,
   unpublishGoal,
