@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
+const { WebSocketServer } = require('ws');
 const Anthropic = require('@anthropic-ai/sdk');
 const app = express();
 const DB = require('./database');
@@ -128,6 +129,78 @@ apiRouter.post('/partner-goals', verifyAuth, async (req, res) => {
   }
 });
 
+// Publish a goal
+apiRouter.post('/goals/publish', verifyAuth, async (req, res) => {
+  try {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+    const { goalId, title, progress } = req.body;
+    const published = await DB.publishGoal({
+      goalId,
+      title,
+      progress,
+      user: user.email,
+    });
+
+    // Broadcast to all connected WebSocket clients
+    const event = JSON.stringify({
+      from: user.email,
+      type: 'goalPublished',
+      value: published,
+    });
+    wss.clients.forEach((client) => {
+      if (client.readyState === 1) {
+        client.send(event);
+      }
+    });
+
+    res.send({ published });
+  } catch (err) {
+    console.error('Error publishing goal:', err);
+    res.status(500).send({ msg: 'Failed to publish goal' });
+  }
+});
+
+// Update progress on a published goal
+apiRouter.put('/goals/publish/:id', verifyAuth, async (req, res) => {
+  try {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+    const { progress } = req.body;
+    const updated = await DB.updatePublishedGoalProgress(req.params.id, progress);
+
+    // Broadcast progress update to all WebSocket clients
+    const event = JSON.stringify({
+      from: user.email,
+      type: 'goalProgressUpdate',
+      value: { _id: req.params.id, progress },
+    });
+    wss.clients.forEach((client) => {
+      if (client.readyState === 1) {
+        client.send(event);
+      }
+    });
+
+    res.send({ updated });
+  } catch (err) {
+    console.error('Error updating published goal:', err);
+    res.status(500).send({ msg: 'Failed to update published goal' });
+  }
+});
+
+// Get all published goals
+apiRouter.get('/goals/published', async (_req, res) => {
+  try {
+    const published = await DB.getPublishedGoals();
+    res.send({ published });
+  } catch (err) {
+    console.error('Error fetching published goals:', err);
+    res.status(500).send({ msg: 'Failed to fetch published goals' });
+  }
+});
+
 // AI chat endpoint — requires authentication
 apiRouter.post('/chat', async (req, res) => {
   try {
@@ -188,6 +261,30 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
+});
+
+// WebSocket server
+const wss = new WebSocketServer({ noServer: true });
+
+server.on('upgrade', (req, socket, head) => {
+  if (req.url === '/ws') {
+    wss.handleUpgrade(req, socket, head, (ws) => {
+      wss.emit('connection', ws, req);
+    });
+  } else {
+    socket.destroy();
+  }
+});
+
+wss.on('connection', (ws) => {
+  ws.on('message', (data) => {
+    // Broadcast incoming messages to all other clients
+    wss.clients.forEach((client) => {
+      if (client !== ws && client.readyState === 1) {
+        client.send(data);
+      }
+    });
+  });
 });

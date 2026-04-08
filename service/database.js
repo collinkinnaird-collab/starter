@@ -7,6 +7,7 @@ const db = client.db('goals');
 const userCollection = db.collection('user');
 const friendCollection = db.collection('friend');
 const goalCollection = db.collection('goal');
+const publishedCollection = db.collection('published');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -71,6 +72,28 @@ async function getFriends(userEmail) {
   return friendCollection.find({ user: userEmail }).toArray();
 }
 
+async function publishGoal(goal) {
+  const doc = {
+    ...goal,
+    publishedAt: new Date(),
+  };
+  const result = await publishedCollection.insertOne(doc);
+  return { ...doc, _id: result.insertedId };
+}
+
+async function getPublishedGoals() {
+  return publishedCollection.find({}).sort({ publishedAt: -1 }).toArray();
+}
+
+async function updatePublishedGoalProgress(id, progress) {
+  const { ObjectId } = require('mongodb');
+  await publishedCollection.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { progress } }
+  );
+  return { _id: id, progress };
+}
+
 module.exports = {
   getUser,
   getUserByToken,
@@ -83,5 +106,8 @@ module.exports = {
   getPartnerGoals,
   addFriend,
   getFriend,
-  getFriends
+  getFriends,
+  publishGoal,
+  getPublishedGoals,
+  updatePublishedGoalProgress,
 };
