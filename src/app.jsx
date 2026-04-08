@@ -99,13 +99,21 @@ export default function App() {
         const res = await fetch('/api/goals', {credentials: 'include'});
         if (!res.ok) throw new Error("Failed to fetch goals");
         const data = await res.json();
+        let all = [];
         if (data.personalGoals || data.partnerGoals) {
           const personal = (data.personalGoals || []).map(normalizeGoal);
           const partner = (data.partnerGoals || []).map(normalizeGoal);
-          setGoals([...personal, ...partner]);
+          all = [...personal, ...partner];
         } else if (Array.isArray(data.goals)) {
-          setGoals(data.goals.map(normalizeGoal));
+          all = data.goals.map(normalizeGoal);
         }
+        // Deduplicate by id
+        const seen = new Set();
+        setGoals(all.filter((g) => {
+          if (seen.has(g.id)) return false;
+          seen.add(g.id);
+          return true;
+        }));
       } catch (err) {
         console.error("Failed to fetch goals", err);
       }
