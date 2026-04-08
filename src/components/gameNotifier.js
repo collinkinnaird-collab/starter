@@ -1,6 +1,7 @@
 const GoalEvent = {
   System: 'system',
   GoalPublished: 'goalPublished',
+  GoalUnpublished: 'goalUnpublished',
   GoalProgressUpdate: 'goalProgressUpdate',
 };
 

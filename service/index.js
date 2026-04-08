@@ -129,6 +129,33 @@ apiRouter.post('/publish-goal', verifyAuth, async (req, res) => {
   }
 });
 
+// Unpublish a goal
+apiRouter.delete('/publish-goal/:goalId', verifyAuth, async (req, res) => {
+  try {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+    await DB.unpublishGoal(req.params.goalId);
+
+    // Broadcast to all WebSocket clients
+    const event = JSON.stringify({
+      from: user.email,
+      type: 'goalUnpublished',
+      value: { goalId: req.params.goalId },
+    });
+    wss.clients.forEach((client) => {
+      if (client.readyState === 1) {
+        client.send(event);
+      }
+    });
+
+    res.send({ msg: 'Unpublished' });
+  } catch (err) {
+    console.error('Error unpublishing goal:', err);
+    res.status(500).send({ msg: 'Failed to unpublish goal' });
+  }
+});
+
 // Update progress on a published goal
 apiRouter.put('/publish-goal/:id', verifyAuth, async (req, res) => {
   try {
@@ -172,7 +199,14 @@ apiRouter.get('/published-goals', async (_req, res) => {
 apiRouter.get('/goals', verifyAuth, async (req, res) => {
   const personalGoals = await DB.getPersonalGoals();
   const partnerGoals = await DB.getPartnerGoals();
-  res.send({ personalGoals, partnerGoals });
+  const publishedGoals = await DB.getPublishedGoals();
+  const publishedGoalIds = new Set(publishedGoals.map((p) => p.goalId));
+
+  const markPublished = (g) => ({ ...g, published: publishedGoalIds.has(String(g._id)) });
+  res.send({
+    personalGoals: personalGoals.map(markPublished),
+    partnerGoals: partnerGoals.map(markPublished),
+  });
 });
 
 apiRouter.post('/goals', verifyAuth, async (req, res) => {

@@ -24,6 +24,8 @@ export function Media() {
         function handleEvent(event) {
             if (event.type === GoalEvent.GoalPublished) {
                 setPosts((prev) => [event.value, ...prev]);
+            } else if (event.type === GoalEvent.GoalUnpublished) {
+                setPosts((prev) => prev.filter((p) => p.goalId !== event.value.goalId));
             } else if (event.type === GoalEvent.GoalProgressUpdate) {
                 setPosts((prev) =>
                     prev.map((p) =>

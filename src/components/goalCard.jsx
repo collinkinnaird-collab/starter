@@ -2,29 +2,42 @@ import React, { useState } from 'react';
 import ProgressCircle from './progressCircle';
 
 export default function GoalCard({ goal, onDelete, onUpdateGoal}) {
-    const [publishing, setPublishing] = useState(false);
-    const [published, setPublished] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [published, setPublished] = useState(goal.published || false);
 
-    async function handlePublish() {
-        setPublishing(true);
+    async function handleTogglePublish() {
+        setLoading(true);
         try {
-            const res = await fetch('/api/publish-goal', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({
-                    goalId: goal.id || goal._id,
-                    title: goal.title,
-                    progress: goal.progress,
-                }),
-            });
-            if (!res.ok) throw new Error('Failed to publish');
-            setPublished(true);
+            if (published) {
+                // Unpublish
+                const res = await fetch(`/api/publish-goal/${goal.id || goal._id}`, {
+                    method: 'DELETE',
+                    credentials: 'include',
+                });
+                if (!res.ok) throw new Error('Failed to unpublish');
+                setPublished(false);
+                onUpdateGoal(goal.id, { published: false });
+            } else {
+                // Publish
+                const res = await fetch('/api/publish-goal', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        goalId: goal.id || goal._id,
+                        title: goal.title,
+                        progress: goal.progress,
+                    }),
+                });
+                if (!res.ok) throw new Error('Failed to publish');
+                setPublished(true);
+                onUpdateGoal(goal.id, { published: true });
+            }
         } catch (err) {
             console.error('Publish error:', err);
-            alert('Failed to publish goal');
+            alert(published ? 'Failed to unpublish goal' : 'Failed to publish goal');
         } finally {
-            setPublishing(false);
+            setLoading(false);
         }
     }
 
@@ -47,10 +60,10 @@ export default function GoalCard({ goal, onDelete, onUpdateGoal}) {
                         type="button"
                         className={`btn btn-sm ${published ? 'btn-success' : 'btn-outline-info'}`}
                         style={{ position: 'absolute', top: '8px', right: '8px' }}
-                        onClick={handlePublish}
-                        disabled={publishing || published}
+                        onClick={handleTogglePublish}
+                        disabled={loading}
                     >
-                        {published ? 'Published' : publishing ? '...' : 'Publish'}
+                        {loading ? '...' : published ? 'Published' : 'Publish'}
                     </button>
                     <div>
                         <p className="mb-2">{goal.title}</p>

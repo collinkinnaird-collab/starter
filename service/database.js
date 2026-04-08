@@ -81,6 +81,10 @@ async function publishGoal(goal) {
   return { ...doc, _id: result.insertedId };
 }
 
+async function unpublishGoal(goalId) {
+  await publishedCollection.deleteMany({ goalId });
+}
+
 async function getPublishedGoals() {
   return publishedCollection.find({}).sort({ publishedAt: -1 }).toArray();
 }
@@ -108,6 +112,7 @@ module.exports = {
   getFriend,
   getFriends,
   publishGoal,
+  unpublishGoal,
   getPublishedGoals,
   updatePublishedGoalProgress,
 };
