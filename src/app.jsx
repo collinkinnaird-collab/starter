@@ -181,7 +181,7 @@ export default function App() {
         const res = await fetch('/api/friends', { credentials: 'include' });
         if (!res.ok) throw new Error("Failed to fetch friends");
         const data = await res.json();
-        setFriends(data);
+        setFriends(data.friends || []);
       } catch (err) {
         console.error("Failed to fetch friends", err);
       }
