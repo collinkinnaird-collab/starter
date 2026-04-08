@@ -13,6 +13,10 @@ const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const authCookieName = 'token';
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
+
+// WebSocket server (declared early so route handlers can reference it)
+const wss = new WebSocketServer({ noServer: true });
+
 app.use(express.static('public'));
 
 app.use(express.json());
@@ -92,44 +96,7 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
-// Restricted endpoint — requires authentication
-apiRouter.get('/goals', verifyAuth, async (req, res) => {
-  const personalGoals = await DB.getPersonalGoals();
-  const partnerGoals = await DB.getPartnerGoals();
-  res.send({ personalGoals, partnerGoals });
-});
-
-apiRouter.post('/goals', verifyAuth, async (req, res) => {
-  try {
-    const user = await findUser('token', req.cookies[authCookieName]);
-    if (user) {
-      const goal = await DB.addPersonalGoal({ ...req.body, user: user.email });
-      res.send({ goal });
-    } else {
-      res.status(401).send({ msg: 'Unauthorized' });
-    }
-  } catch (err) {
-    console.error('Error creating goal:', err);
-    res.status(500).send({ msg: 'Failed to create goal' });
-  }
-});
-
-apiRouter.post('/partner-goals', verifyAuth, async (req, res) => {
-  try {
-    const user = await findUser('token', req.cookies[authCookieName]);
-    if (user) {
-      const goal = await DB.addPartnerGoal({ ...req.body, user: user.email });
-      res.send({ goal });
-    } else {
-      res.status(401).send({ msg: 'Unauthorized' });
-    }
-  } catch (err) {
-    console.error('Error creating partner goal:', err);
-    res.status(500).send({ msg: 'Failed to create goal' });
-  }
-});
-
-// Publish a goal
+// Publish a goal (must be before generic /goals routes)
 apiRouter.post('/goals/publish', verifyAuth, async (req, res) => {
   try {
     const user = await findUser('token', req.cookies[authCookieName]);
@@ -201,6 +168,43 @@ apiRouter.get('/goals/published', async (_req, res) => {
   }
 });
 
+// Restricted endpoint — requires authentication
+apiRouter.get('/goals', verifyAuth, async (req, res) => {
+  const personalGoals = await DB.getPersonalGoals();
+  const partnerGoals = await DB.getPartnerGoals();
+  res.send({ personalGoals, partnerGoals });
+});
+
+apiRouter.post('/goals', verifyAuth, async (req, res) => {
+  try {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+      const goal = await DB.addPersonalGoal({ ...req.body, user: user.email });
+      res.send({ goal });
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (err) {
+    console.error('Error creating goal:', err);
+    res.status(500).send({ msg: 'Failed to create goal' });
+  }
+});
+
+apiRouter.post('/partner-goals', verifyAuth, async (req, res) => {
+  try {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+      const goal = await DB.addPartnerGoal({ ...req.body, user: user.email });
+      res.send({ goal });
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (err) {
+    console.error('Error creating partner goal:', err);
+    res.status(500).send({ msg: 'Failed to create goal' });
+  }
+});
+
 // AI chat endpoint — requires authentication
 apiRouter.post('/chat', async (req, res) => {
   try {
@@ -264,9 +268,6 @@ function setAuthCookie(res, authToken) {
 const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-// WebSocket server
-const wss = new WebSocketServer({ noServer: true });
 
 server.on('upgrade', (req, socket, head) => {
   if (req.url === '/ws') {
