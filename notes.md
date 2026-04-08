@@ -90,3 +90,8 @@ WHAT!! There are public apis for chatbots. This was so cool. I did need to pay $
 ### Database deliverable 
 
 Ok, this is pretty straightfoward, I have done db before, a bug I had though was the two different ID's I was using, mongo db had the same id for all goals and my frontend had differnt ones. Becuase of this, each goal was treated as the same regarding progess and goal type. So that was good to learn. I also learned that I HAVE A LOT TO KEEP TRACK OF FOR EACH USER. much more than I thought. I implemented one for now (goals) just to submit on time, but I will do the rest later to make it work nice"ish" for the final deliverable. 
+
+
+### websocket deliverable
+
+That was so frusterating. I kept getting a 404 error and having no idea why it was happening, not even AI was getting it right. I finally found out that my server was not actually running the updated code for some reason. Some resources say it may have cached old code or something, but that sounds silly, what I had to do was a clean reset of port 4000 to make sure nothing was on that, here were the commands (in case this happens again) lsof -i :4000. and use lsof to see what instances or servers are running. SO SILLY. 
