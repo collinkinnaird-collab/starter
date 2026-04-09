@@ -133,8 +133,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - index.js has WEbSocketServer with upgrade on /ws, connection listener
+- [x] **Frontend makes WebSocket connection** - gameNotifier.js (originally copied from simon, adjusted to match the needs of my app) notifies about publishing goals. 
+- [x] **Data sent over WebSocket connection** - 5 events are broadcast, gaolPublished, goalUnpublished, goalProgressUpdate, avataChange
+- [x] **WebSocket data displayed** - Live updates for new goals, removed goals, progress updates, and avatar changes.
+- [x] **Application is fully functional** - Everything is working that I want working! I think no mocks remain, did a sweep with ai to check for TODO or Placeholder keyowrds, so, i think its good. 
