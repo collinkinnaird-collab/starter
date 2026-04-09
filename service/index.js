@@ -60,7 +60,14 @@ apiRouter.get('/friends', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     const friends = await DB.getFriends(user.email);
-    res.send({ friends });
+    // Attach avatars to friends
+    const emails = friends.map((f) => f.email);
+    const avatarMap = await DB.getUserAvatars(emails);
+    const friendsWithAvatars = friends.map((f) => ({
+      ...f,
+      avatar: avatarMap[f.email] || '/images/image_1.png',
+    }));
+    res.send({ friends: friendsWithAvatars });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }

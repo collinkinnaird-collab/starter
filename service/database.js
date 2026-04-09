@@ -93,7 +93,7 @@ async function getRandomUsers(excludeEmail, limit = 10) {
   return userCollection.aggregate([
     { $match: { email: { $ne: excludeEmail } } },
     { $sample: { size: limit } },
-    { $project: { email: 1, _id: 1 } },
+    { $project: { email: 1, _id: 1, avatar: 1 } },
   ]).toArray();
 }
 

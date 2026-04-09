@@ -52,7 +52,7 @@ export function Friends({ friends, onAddFriend, onDeleteFriend }) {
                                     <div className="col-12">
                                         <div className="card p-3 custom d-flex flex-row align-items-center justify-content-between">
                                             <div className="d-flex align-items-center gap-3">
-                                                <img src="/images/image_2.png" alt={friend.email} width="40" height="40" className="rounded-circle" />
+                                                <img src={friend.avatar || "/images/image_1.png"} alt={friend.email} width="40" height="40" className="rounded-circle" />
                                                 <span>{friend.email}</span>
                                             </div>
                                             <div className="d-flex gap-2">
@@ -99,7 +99,7 @@ export function Friends({ friends, onAddFriend, onDeleteFriend }) {
                                     <div className="col-12">
                                         <div className="card p-3 custom d-flex flex-row align-items-center justify-content-between">
                                             <div className="d-flex align-items-center gap-3">
-                                                <img src="/images/image_1.png" alt={user.email} width="40" height="40" className="rounded-circle" />
+                                                <img src={user.avatar || "/images/image_1.png"} alt={user.email} width="40" height="40" className="rounded-circle" />
                                                 <span>{user.email}</span>
                                             </div>
                                             <button
