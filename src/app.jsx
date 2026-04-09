@@ -17,15 +17,6 @@ export default function App() {
     const [friends, setFriends] = useState([]);
     const [avatar, setAvatar] = useState('/images/image_1.png');
 
-    const DEFAULT_GOALS = [
-      { id: "g1", title: "Gain 20 pounds by the end of the year", progress: 90, isPartner: false },
-      { id: "g2", title: "Read 3 books together", progress: 30, isPartner: true },
-      { id: "g3", title: "Study 30 min each day", progress: 40, isPartner: false },
-      { id: "g4", title: "Go on one weekly run together", progress: 25, isPartner: true },
-      { id: "g5", title: "One daily act of service", progress: 99, isPartner: false },
-      { id: "g6", title: "Go swimming", progress: 2, isPartner: true },
-    ]
-
     const STORAGE_KEY = "goals.v1";
     const AUTH_KEY = "auth.v1";
 

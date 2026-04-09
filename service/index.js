@@ -48,7 +48,8 @@ apiRouter.get('/friend-goals/:id', async (req, res) => {
     if (!friend) return res.status(404).send({ msg: 'Friend not found' });
 
     const { personalGoals, partnerGoals } = await DB.getFriendGoals(friend.email, user.email);
-    res.send({ friendEmail: friend.email, personalGoals, partnerGoals });
+    const friendAvatar = await DB.getUserAvatar(friend.email);
+    res.send({ friendEmail: friend.email, friendAvatar, personalGoals, partnerGoals });
   } catch (err) {
     console.error('Error fetching friend goals:', err);
     res.status(500).send({ msg: 'Failed to fetch friend goals' });
@@ -261,7 +262,7 @@ apiRouter.put('/publish-goal/:id', verifyAuth, async (req, res) => {
     const event = JSON.stringify({
       from: user.email,
       type: 'goalProgressUpdate',
-      value: { _id: req.params.id, progress },
+      value: { goalId: req.params.id, progress },
     });
     wss.clients.forEach((client) => {
       if (client.readyState === 1) {

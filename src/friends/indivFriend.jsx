@@ -5,6 +5,7 @@ import ProgressCircle from '../components/progressCircle';
 export function IndividualFriend() {
     const { id } = useParams();
     const [friendEmail, setFriendEmail] = useState('');
+    const [friendAvatar, setFriendAvatar] = useState('/images/image_1.png');
     const [personalGoals, setPersonalGoals] = useState([]);
     const [partnerGoals, setPartnerGoals] = useState([]);
 
@@ -15,6 +16,7 @@ export function IndividualFriend() {
                 if (!res.ok) throw new Error('Failed to fetch');
                 const data = await res.json();
                 setFriendEmail(data.friendEmail || '');
+                setFriendAvatar(data.friendAvatar || '/images/image_1.png');
                 setPersonalGoals(data.personalGoals || []);
                 setPartnerGoals(data.partnerGoals || []);
             } catch (err) {
@@ -29,7 +31,7 @@ export function IndividualFriend() {
             <div className="container-fluid">
                 <div className="row">
                     <aside className="col-12 col-md-3 col-lg-2 border-end p-3 sticky-sidebar">
-                        <img src="/images/image_2.png" className="img-fluid rounded-circle mb-3" alt="friend" width="250" />
+                        <img src={friendAvatar} className="img-fluid rounded-circle mb-3" alt="friend" width="250" />
                         <p className="small">{friendEmail}</p>
                         <NavLink className="btn btn-outline-info btn-sm" to="/friends">Back to Friends</NavLink>
                     </aside>
